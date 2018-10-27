@@ -1,0 +1,17 @@
+RECURSION
+436
+451
+389
+430
+362
+
+average: 413.6
+
+ITERATION
+424
+433
+414
+391
+409
+
+average: 414.2
