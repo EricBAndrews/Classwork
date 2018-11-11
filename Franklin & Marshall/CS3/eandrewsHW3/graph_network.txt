@@ -1,0 +1,12 @@
+4 6
+Router0
+Router1
+Router2
+Router3
+0 3 3.2 Link0
+1 2 5.5 Link1
+2 0 2.7 Link2
+2 1 5.5 Link3
+2 3 2.9 Link4
+3 1 1.3 Link5
+

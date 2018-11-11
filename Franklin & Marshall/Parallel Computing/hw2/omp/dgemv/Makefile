@@ -1,0 +1,7 @@
+CC = gcc-6
+
+dgemv: dgemv.c
+	$(CC) -std=c11 -O3 -o dgemv dgemv.c -fopenmp -lm
+
+clean:
+	rm dgemv;

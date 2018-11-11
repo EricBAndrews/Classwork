@@ -1,0 +1,35 @@
+\documentclass[12pt]{article}
+\usepackage[margin=2cm,bottom=2.5cm,top=3cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+
+\renewcommand\headrulewidth{.01cm}
+\renewcommand\footrulewidth{.01cm}
+\fancyhead[L]{Eric Andrews}
+\fancyhead[R]{CUDA Notes}
+\cfoot{|\enspace\thepage\enspace\thepage}
+
+\begin{document}
+\title{CUDA Notes}
+\author{Eric Andrews}
+\date{\today}
+\pagestyle{fancy}
+
+\maketitle
+
+\centerline{\textit{CUDA Implementation}}
+
+\begin{enumerate}[label=-]
+\item General Structure
+  \begin{enumerate}[label=-]
+  \item Send matrices to be multiplied to the GPU
+  \item Have each thread compute the element of C corresponding to its id by iterating through the corresponding row and column
+  \end{enumerate}
+\end{enumerate}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

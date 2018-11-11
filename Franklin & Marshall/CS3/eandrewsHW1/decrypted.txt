@@ -1,0 +1,10 @@
+Plaintext file!
+
+This is a plaintext file.
+
+It has ASCII symbols!
+
+abcdefghijklmnopqrstuvwxyz
+!@#$%^&*()
+
+Wowee.

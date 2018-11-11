@@ -1,0 +1,195 @@
+\documentclass[12pt]{article}
+\usepackage[margin=2cm,bottom=2.5cm,top=3cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{lineno}
+\usepackage{tabularx}
+\usepackage[version=4]{mhchem}
+\usepackage{chemformula}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{pgfplots}
+\usepackage{endnotes}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{pgf}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{calc}
+\usetikzlibrary{automata,positioning}
+\usetikzlibrary{shapes}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{language = c,
+numbers = left,
+tabsize = 4,
+frame = single,
+keywordstyle = {},
+showstringspaces = false,
+}
+\fancyhead[LE,LO]{}
+\fancyhead[CE,CO]{\textsc{Analysis of Parallel Dijkstra}}
+\fancyhead[RE,RO]{}
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
+\renewcommand{\headrulewidth}{.01cm}
+\renewcommand{\footrulewidth}{.01cm}
+\renewcommand\linenumberfont{\normalfont\tiny}
+\renewcommand{\notesname}{Endnotes}
+\newcommand{\ditto}{
+    \tikz{
+        \draw [line width=0.12ex] (-0.2ex,0) -- +(0,0.8ex)
+            (0.2ex,0) -- +(0,0.8ex);
+        \draw [line width=0.08ex] (-0.6ex,0.4ex) -- +(-1.5em,0)
+            (0.6ex,0.4ex) -- +(1.5em,0);
+    }
+}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\setlength{\parindent}{.5cm}
+
+\begin{document}
+\title{Analysis of Parallel Dijkstra}
+\author{Eric Andrews}
+\date{\today}
+\pagestyle{fancy}
+\maketitle
+\onehalfspacing
+
+\rule{\textwidth}{.1pt}
+\vspace*{.75cm}
+
+\centerline{\textbf{Initialize}}
+
+\noindent Work:
+
+For each vertex $v$, the algorithm must set perform a single assignment. Thus the
+work of is given by:
+
+\centerline{$v$}
+
+\noindent Span:
+
+No iteration requires any other; given $v$ threads, each assignment can be done
+concurrently. Thus the span is given by:
+
+\centerline{$1$}
+
+\vspace{.75cm}
+
+\centerline{\textbf{Get Min Vertex}}
+
+\noindent Work:
+
+The algorithm must check each vertex once. Thus the work of the algorithm is given
+by:
+
+\centerline{$v$}
+
+\noindent Span:
+
+No iteration requires any other; given $v$ threads, getMinVertex could perform
+each check concurrently.
+
+If given $v$ threads, the algorithm must merge them together to find the global min
+from the local mins. This is done in a tree structure, which gives it a
+logarithmic runtime. Thus the span is given by:
+
+\centerline{$1 + \lceil\log_{2}(v)\rceil$}
+
+\newpage
+
+\centerline{\textbf{Update Distances}}
+
+\noindent Work:
+
+The algorithm must check each vertex once. Thus the work of the algorithm is given
+by:
+
+\centerline{$v$}
+
+\noindent Span:
+
+Each check can be performed concurrently. Thus the span of the algorithm is given
+by:
+
+\centerline{$1$}
+
+\vspace{.75cm}
+
+\centerline{\textbf{Parallel Dijkstra}}
+
+\noindent Work:
+
+initialize is performed once, and has work $v$.
+
+getMinVertex and updateDistances are each performed $v - 1$ times, and have a
+combined work of 2v. Thus the work of the overall algorithm is given by:
+
+\begin{align*}
+  & v + 2v(v - 1) \\
+  &= v + 2v^{2} - 2v \\
+  &= 2v^{2} - v
+\end{align*}
+  
+\noindent Span:
+
+initialize is performed once, and has work $1$.
+
+getMinVertex and updateDistances are each performed $v - 1$ times in serial, and
+have spans of $1 + \lceil\log_{2}(v)\rceil$ and $1$, respectively. Thus the span
+of the overall algorithm is given by:
+
+\begin{align*}
+  & 1 + (v - 1)(1 + 1 + \lceil\log_{2}(v)\rceil) \\
+  &= 1 + (v - 1)(2 + \lceil\log_{2}(v)\rceil) \\
+\end{align*}
+
+\newpage
+
+\centerline{\textbf{Questions}}
+
+\begin{enumerate}
+\item
+  The ideal runtime of parallel Dijkstra's is approximately
+  O$(v \times \log_{2}(v))$. Therefore if $e$ is significantly greater than $v$,
+  it is more efficient to use a parallel algorithm; otherwise thread overhead
+  makes the adjacency list implementation more efficient. Thus in sparse graphs I
+  would use an adjacency list, and in dense graphs I would use a parallel
+  algorithm.
+
+\item
+  With only 1 processor, the runtime of parallel Dijkstra's is O$(v^{2} - v)$. As
+  the number of processors increases, this is divided by the number of processors.
+  Taking into account thread overhead, unless the graph is dense enough that $e$
+  is significantly greater than $v^{2}$ it is more efficient to use an adjacency
+  list implementation.
+
+\item
+  The parallel implementation iterates on all vertices for each vertex checked.
+  This makes it very easy to divide into independent segments for each thread
+  to operate on. The adjacency list implementation, however, iterates by the
+  number of edges adjacent to the vertex currently being worked on. This makes it
+  highly efficient for serial implementations, but renders it difficult to run in
+  parallel, as each iteration can only be divided as many times as there are
+  adjacent edges. This is both irregular---and therefore awkward to
+  parallelize---and not worth the thread overhead if the graph is not
+  exceptionally dense.
+  
+\end{enumerate}
+
+\end{document}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

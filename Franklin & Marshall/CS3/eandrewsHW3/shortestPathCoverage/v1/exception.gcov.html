@@ -1,0 +1,346 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - shortestPathCoverage.info - v1/exception</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">v1</a> - exception<span style="font-size: 80%;"> (source / <a href="exception.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">shortestPathCoverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-12-08 16:03:09</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : // -*- C++ -*-</a>
+<span class="lineNum">       2 </span>            : //===-------------------------- exception ---------------------------------===//
+<span class="lineNum">       3 </span>            : //
+<span class="lineNum">       4 </span>            : //                     The LLVM Compiler Infrastructure
+<span class="lineNum">       5 </span>            : //
+<span class="lineNum">       6 </span>            : // This file is dual licensed under the MIT and the University of Illinois Open
+<span class="lineNum">       7 </span>            : // Source Licenses. See LICENSE.TXT for details.
+<span class="lineNum">       8 </span>            : //
+<span class="lineNum">       9 </span>            : //===----------------------------------------------------------------------===//
+<span class="lineNum">      10 </span>            : 
+<span class="lineNum">      11 </span>            : #ifndef _LIBCPP_EXCEPTION
+<span class="lineNum">      12 </span>            : #define _LIBCPP_EXCEPTION
+<span class="lineNum">      13 </span>            : 
+<span class="lineNum">      14 </span>            : /*
+<span class="lineNum">      15 </span>            :     exception synopsis
+<span class="lineNum">      16 </span>            : 
+<span class="lineNum">      17 </span>            : namespace std
+<span class="lineNum">      18 </span>            : {
+<span class="lineNum">      19 </span>            : 
+<span class="lineNum">      20 </span>            : class exception
+<span class="lineNum">      21 </span>            : {
+<span class="lineNum">      22 </span>            : public:
+<span class="lineNum">      23 </span>            :     exception() noexcept;
+<span class="lineNum">      24 </span>            :     exception(const exception&amp;) noexcept;
+<span class="lineNum">      25 </span>            :     exception&amp; operator=(const exception&amp;) noexcept;
+<span class="lineNum">      26 </span>            :     virtual ~exception() noexcept;
+<span class="lineNum">      27 </span>            :     virtual const char* what() const noexcept;
+<span class="lineNum">      28 </span>            : };
+<span class="lineNum">      29 </span>            : 
+<span class="lineNum">      30 </span>            : class bad_exception
+<span class="lineNum">      31 </span>            :     : public exception
+<span class="lineNum">      32 </span>            : {
+<span class="lineNum">      33 </span>            : public:
+<span class="lineNum">      34 </span>            :     bad_exception() noexcept;
+<span class="lineNum">      35 </span>            :     bad_exception(const bad_exception&amp;) noexcept;
+<span class="lineNum">      36 </span>            :     bad_exception&amp; operator=(const bad_exception&amp;) noexcept;
+<span class="lineNum">      37 </span>            :     virtual ~bad_exception() noexcept;
+<span class="lineNum">      38 </span>            :     virtual const char* what() const noexcept;
+<span class="lineNum">      39 </span>            : };
+<span class="lineNum">      40 </span>            : 
+<span class="lineNum">      41 </span>            : typedef void (*unexpected_handler)();
+<span class="lineNum">      42 </span>            : unexpected_handler set_unexpected(unexpected_handler  f ) noexcept;
+<span class="lineNum">      43 </span>            : unexpected_handler get_unexpected() noexcept;
+<span class="lineNum">      44 </span>            : [[noreturn]] void unexpected();
+<span class="lineNum">      45 </span>            : 
+<span class="lineNum">      46 </span>            : typedef void (*terminate_handler)();
+<span class="lineNum">      47 </span>            : terminate_handler set_terminate(terminate_handler  f ) noexcept;
+<span class="lineNum">      48 </span>            : terminate_handler get_terminate() noexcept;
+<span class="lineNum">      49 </span>            : [[noreturn]] void terminate() noexcept;
+<span class="lineNum">      50 </span>            : 
+<span class="lineNum">      51 </span>            : bool uncaught_exception()  noexcept;
+<span class="lineNum">      52 </span>            : int  uncaught_exceptions() noexcept;  // C++17
+<span class="lineNum">      53 </span>            : 
+<span class="lineNum">      54 </span>            : typedef unspecified exception_ptr;
+<span class="lineNum">      55 </span>            : 
+<span class="lineNum">      56 </span>            : exception_ptr current_exception() noexcept;
+<span class="lineNum">      57 </span>            : void rethrow_exception [[noreturn]] (exception_ptr p);
+<span class="lineNum">      58 </span>            : template&lt;class E&gt; exception_ptr make_exception_ptr(E e) noexcept;
+<span class="lineNum">      59 </span>            : 
+<span class="lineNum">      60 </span>            : class nested_exception
+<span class="lineNum">      61 </span>            : {
+<span class="lineNum">      62 </span>            : public:
+<span class="lineNum">      63 </span>            :     nested_exception() noexcept;
+<span class="lineNum">      64 </span>            :     nested_exception(const nested_exception&amp;) noexcept = default;
+<span class="lineNum">      65 </span>            :     nested_exception&amp; operator=(const nested_exception&amp;) noexcept = default;
+<span class="lineNum">      66 </span>            :     virtual ~nested_exception() = default;
+<span class="lineNum">      67 </span>            : 
+<span class="lineNum">      68 </span>            :     // access functions
+<span class="lineNum">      69 </span>            :     [[noreturn]] void rethrow_nested() const;
+<span class="lineNum">      70 </span>            :     exception_ptr nested_ptr() const noexcept;
+<span class="lineNum">      71 </span>            : };
+<span class="lineNum">      72 </span>            : 
+<span class="lineNum">      73 </span>            : template &lt;class T&gt; [[noreturn]] void throw_with_nested(T&amp;&amp; t);
+<span class="lineNum">      74 </span>            : template &lt;class E&gt; void rethrow_if_nested(const E&amp; e);
+<span class="lineNum">      75 </span>            : 
+<span class="lineNum">      76 </span>            : }  // std
+<span class="lineNum">      77 </span>            : 
+<span class="lineNum">      78 </span>            : */
+<span class="lineNum">      79 </span>            : 
+<span class="lineNum">      80 </span>            : #include &lt;__config&gt;
+<span class="lineNum">      81 </span>            : #include &lt;cstddef&gt;
+<span class="lineNum">      82 </span>            : #include &lt;cstdlib&gt;
+<span class="lineNum">      83 </span>            : #include &lt;type_traits&gt;
+<span class="lineNum">      84 </span>            : 
+<span class="lineNum">      85 </span>            : #if defined(_LIBCPP_ABI_MICROSOFT)
+<span class="lineNum">      86 </span>            : #include &lt;vcruntime_exception.h&gt;
+<span class="lineNum">      87 </span>            : #endif
+<span class="lineNum">      88 </span>            : 
+<span class="lineNum">      89 </span>            : #if !defined(_LIBCPP_HAS_NO_PRAGMA_SYSTEM_HEADER)
+<span class="lineNum">      90 </span>            : #pragma GCC system_header
+<span class="lineNum">      91 </span>            : #endif
+<span class="lineNum">      92 </span>            : 
+<span class="lineNum">      93 </span>            : namespace std  // purposefully not using versioning namespace
+<span class="lineNum">      94 </span>            : {
+<span class="lineNum">      95 </span>            : 
+<span class="lineNum">      96 </span>            : #if !defined(_LIBCPP_ABI_MICROSOFT)
+<span class="lineNum">      97 </span>            : class _LIBCPP_EXCEPTION_ABI exception
+<a name="98"><span class="lineNum">      98 </span>            : {</a>
+<span class="lineNum">      99 </span>            : public:
+<span class="lineNum">     100 </span><span class="lineNoCov">          0 :     _LIBCPP_INLINE_VISIBILITY exception() _NOEXCEPT {}</span>
+<span class="lineNum">     101 </span>            :     virtual ~exception() _NOEXCEPT;
+<span class="lineNum">     102 </span>            :     virtual const char* what() const _NOEXCEPT;
+<span class="lineNum">     103 </span>            : };
+<span class="lineNum">     104 </span>            : 
+<span class="lineNum">     105 </span>            : class _LIBCPP_EXCEPTION_ABI bad_exception
+<span class="lineNum">     106 </span>            :     : public exception
+<span class="lineNum">     107 </span>            : {
+<span class="lineNum">     108 </span>            : public:
+<span class="lineNum">     109 </span>            :     _LIBCPP_INLINE_VISIBILITY bad_exception() _NOEXCEPT {}
+<span class="lineNum">     110 </span>            :     virtual ~bad_exception() _NOEXCEPT;
+<span class="lineNum">     111 </span>            :     virtual const char* what() const _NOEXCEPT;
+<span class="lineNum">     112 </span>            : };
+<span class="lineNum">     113 </span>            : #endif // !_LIBCPP_ABI_MICROSOFT
+<span class="lineNum">     114 </span>            : 
+<span class="lineNum">     115 </span>            : typedef void (*unexpected_handler)();
+<span class="lineNum">     116 </span>            : _LIBCPP_FUNC_VIS unexpected_handler set_unexpected(unexpected_handler) _NOEXCEPT;
+<span class="lineNum">     117 </span>            : _LIBCPP_FUNC_VIS unexpected_handler get_unexpected() _NOEXCEPT;
+<span class="lineNum">     118 </span>            : _LIBCPP_NORETURN _LIBCPP_FUNC_VIS void unexpected();
+<span class="lineNum">     119 </span>            : 
+<span class="lineNum">     120 </span>            : typedef void (*terminate_handler)();
+<span class="lineNum">     121 </span>            : _LIBCPP_FUNC_VIS terminate_handler set_terminate(terminate_handler) _NOEXCEPT;
+<span class="lineNum">     122 </span>            : _LIBCPP_FUNC_VIS terminate_handler get_terminate() _NOEXCEPT;
+<span class="lineNum">     123 </span>            : _LIBCPP_NORETURN _LIBCPP_FUNC_VIS void terminate() _NOEXCEPT;
+<span class="lineNum">     124 </span>            : 
+<span class="lineNum">     125 </span>            : _LIBCPP_FUNC_VIS bool uncaught_exception() _NOEXCEPT;
+<span class="lineNum">     126 </span>            : _LIBCPP_FUNC_VIS _LIBCPP_AVAILABILITY_UNCAUGHT_EXCEPTIONS int uncaught_exceptions() _NOEXCEPT;
+<span class="lineNum">     127 </span>            : 
+<span class="lineNum">     128 </span>            : class _LIBCPP_TYPE_VIS exception_ptr;
+<span class="lineNum">     129 </span>            : 
+<span class="lineNum">     130 </span>            : _LIBCPP_FUNC_VIS exception_ptr current_exception() _NOEXCEPT;
+<span class="lineNum">     131 </span>            : _LIBCPP_NORETURN _LIBCPP_FUNC_VIS void rethrow_exception(exception_ptr);
+<span class="lineNum">     132 </span>            : 
+<span class="lineNum">     133 </span>            : class _LIBCPP_TYPE_VIS exception_ptr
+<span class="lineNum">     134 </span>            : {
+<span class="lineNum">     135 </span>            :     void* __ptr_;
+<span class="lineNum">     136 </span>            : public:
+<span class="lineNum">     137 </span>            :     _LIBCPP_INLINE_VISIBILITY exception_ptr() _NOEXCEPT : __ptr_() {}
+<span class="lineNum">     138 </span>            :     _LIBCPP_INLINE_VISIBILITY exception_ptr(nullptr_t) _NOEXCEPT : __ptr_() {}
+<span class="lineNum">     139 </span>            :     exception_ptr(const exception_ptr&amp;) _NOEXCEPT;
+<span class="lineNum">     140 </span>            :     exception_ptr&amp; operator=(const exception_ptr&amp;) _NOEXCEPT;
+<span class="lineNum">     141 </span>            :     ~exception_ptr() _NOEXCEPT;
+<span class="lineNum">     142 </span>            : 
+<span class="lineNum">     143 </span>            :     _LIBCPP_INLINE_VISIBILITY
+<span class="lineNum">     144 </span>            :     _LIBCPP_EXPLICIT
+<span class="lineNum">     145 </span>            :         operator bool() const _NOEXCEPT {return __ptr_ != nullptr;}
+<span class="lineNum">     146 </span>            : 
+<span class="lineNum">     147 </span>            :     friend _LIBCPP_INLINE_VISIBILITY
+<span class="lineNum">     148 </span>            :     bool operator==(const exception_ptr&amp; __x, const exception_ptr&amp; __y) _NOEXCEPT
+<span class="lineNum">     149 </span>            :         {return __x.__ptr_ == __y.__ptr_;}
+<span class="lineNum">     150 </span>            :     friend _LIBCPP_INLINE_VISIBILITY
+<span class="lineNum">     151 </span>            :     bool operator!=(const exception_ptr&amp; __x, const exception_ptr&amp; __y) _NOEXCEPT
+<span class="lineNum">     152 </span>            :         {return !(__x == __y);}
+<span class="lineNum">     153 </span>            : 
+<span class="lineNum">     154 </span>            :     friend _LIBCPP_FUNC_VIS exception_ptr current_exception() _NOEXCEPT;
+<span class="lineNum">     155 </span>            :     friend _LIBCPP_FUNC_VIS void rethrow_exception(exception_ptr);
+<span class="lineNum">     156 </span>            : };
+<span class="lineNum">     157 </span>            : 
+<span class="lineNum">     158 </span>            : template&lt;class _Ep&gt;
+<span class="lineNum">     159 </span>            : exception_ptr
+<span class="lineNum">     160 </span>            : make_exception_ptr(_Ep __e) _NOEXCEPT
+<span class="lineNum">     161 </span>            : {
+<span class="lineNum">     162 </span>            : #ifndef _LIBCPP_NO_EXCEPTIONS
+<span class="lineNum">     163 </span>            :     try
+<span class="lineNum">     164 </span>            :     {
+<span class="lineNum">     165 </span>            :         throw __e;
+<span class="lineNum">     166 </span>            :     }
+<span class="lineNum">     167 </span>            :     catch (...)
+<span class="lineNum">     168 </span>            :     {
+<span class="lineNum">     169 </span>            :         return current_exception();
+<span class="lineNum">     170 </span>            :     }
+<span class="lineNum">     171 </span>            : #else
+<span class="lineNum">     172 </span>            :     ((void)__e);
+<span class="lineNum">     173 </span>            :     _VSTD::abort();
+<span class="lineNum">     174 </span>            : #endif
+<span class="lineNum">     175 </span>            : }
+<span class="lineNum">     176 </span>            : 
+<span class="lineNum">     177 </span>            : // nested_exception
+<span class="lineNum">     178 </span>            : 
+<span class="lineNum">     179 </span>            : class _LIBCPP_EXCEPTION_ABI nested_exception
+<span class="lineNum">     180 </span>            : {
+<span class="lineNum">     181 </span>            :     exception_ptr __ptr_;
+<span class="lineNum">     182 </span>            : public:
+<span class="lineNum">     183 </span>            :     nested_exception() _NOEXCEPT;
+<span class="lineNum">     184 </span>            : //     nested_exception(const nested_exception&amp;) noexcept = default;
+<span class="lineNum">     185 </span>            : //     nested_exception&amp; operator=(const nested_exception&amp;) noexcept = default;
+<span class="lineNum">     186 </span>            :     virtual ~nested_exception() _NOEXCEPT;
+<span class="lineNum">     187 </span>            : 
+<span class="lineNum">     188 </span>            :     // access functions
+<span class="lineNum">     189 </span>            :     _LIBCPP_NORETURN void rethrow_nested() const;
+<span class="lineNum">     190 </span>            :     _LIBCPP_INLINE_VISIBILITY exception_ptr nested_ptr() const _NOEXCEPT {return __ptr_;}
+<span class="lineNum">     191 </span>            : };
+<span class="lineNum">     192 </span>            : 
+<span class="lineNum">     193 </span>            : template &lt;class _Tp&gt;
+<span class="lineNum">     194 </span>            : struct __nested
+<span class="lineNum">     195 </span>            :     : public _Tp,
+<span class="lineNum">     196 </span>            :       public nested_exception
+<span class="lineNum">     197 </span>            : {
+<span class="lineNum">     198 </span>            :     _LIBCPP_INLINE_VISIBILITY explicit __nested(const _Tp&amp; __t) : _Tp(__t) {}
+<span class="lineNum">     199 </span>            : };
+<span class="lineNum">     200 </span>            : 
+<span class="lineNum">     201 </span>            : template &lt;class _Tp&gt;
+<span class="lineNum">     202 </span>            : _LIBCPP_NORETURN
+<span class="lineNum">     203 </span>            : void
+<span class="lineNum">     204 </span>            : #ifndef _LIBCPP_HAS_NO_RVALUE_REFERENCES
+<span class="lineNum">     205 </span>            : throw_with_nested(_Tp&amp;&amp; __t, typename enable_if&lt;
+<span class="lineNum">     206 </span>            :                   is_class&lt;typename remove_reference&lt;_Tp&gt;::type&gt;::value &amp;&amp;
+<span class="lineNum">     207 </span>            :                   !is_base_of&lt;nested_exception, typename remove_reference&lt;_Tp&gt;::type&gt;::value
+<span class="lineNum">     208 </span>            :                   &amp;&amp; !__libcpp_is_final&lt;typename remove_reference&lt;_Tp&gt;::type&gt;::value
+<span class="lineNum">     209 </span>            :                                     &gt;::type* = 0)
+<span class="lineNum">     210 </span>            : #else  // _LIBCPP_HAS_NO_RVALUE_REFERENCES
+<span class="lineNum">     211 </span>            : throw_with_nested (_Tp&amp; __t, typename enable_if&lt;
+<span class="lineNum">     212 </span>            :                   is_class&lt;_Tp&gt;::value &amp;&amp; !is_base_of&lt;nested_exception, _Tp&gt;::value
+<span class="lineNum">     213 </span>            :                                     &gt;::type* = 0)
+<span class="lineNum">     214 </span>            : #endif  // _LIBCPP_HAS_NO_RVALUE_REFERENCES
+<span class="lineNum">     215 </span>            : {
+<span class="lineNum">     216 </span>            : #ifndef _LIBCPP_NO_EXCEPTIONS
+<span class="lineNum">     217 </span>            :     throw __nested&lt;typename remove_reference&lt;_Tp&gt;::type&gt;(_VSTD::forward&lt;_Tp&gt;(__t));
+<span class="lineNum">     218 </span>            : #else
+<span class="lineNum">     219 </span>            :     ((void)__t);
+<span class="lineNum">     220 </span>            :     // FIXME: Make this abort.
+<span class="lineNum">     221 </span>            : #endif
+<span class="lineNum">     222 </span>            : }
+<span class="lineNum">     223 </span>            : 
+<span class="lineNum">     224 </span>            : template &lt;class _Tp&gt;
+<span class="lineNum">     225 </span>            : _LIBCPP_NORETURN
+<span class="lineNum">     226 </span>            : void
+<span class="lineNum">     227 </span>            : #ifndef _LIBCPP_HAS_NO_RVALUE_REFERENCES
+<span class="lineNum">     228 </span>            : throw_with_nested(_Tp&amp;&amp; __t, typename enable_if&lt;
+<span class="lineNum">     229 </span>            :                   !is_class&lt;typename remove_reference&lt;_Tp&gt;::type&gt;::value ||
+<span class="lineNum">     230 </span>            :                   is_base_of&lt;nested_exception, typename remove_reference&lt;_Tp&gt;::type&gt;::value
+<span class="lineNum">     231 </span>            :                   || __libcpp_is_final&lt;typename remove_reference&lt;_Tp&gt;::type&gt;::value
+<span class="lineNum">     232 </span>            :                                     &gt;::type* = 0)
+<span class="lineNum">     233 </span>            : #else  // _LIBCPP_HAS_NO_RVALUE_REFERENCES
+<span class="lineNum">     234 </span>            : throw_with_nested (_Tp&amp; __t, typename enable_if&lt;
+<span class="lineNum">     235 </span>            :                   !is_class&lt;_Tp&gt;::value || is_base_of&lt;nested_exception, _Tp&gt;::value
+<span class="lineNum">     236 </span>            :                                     &gt;::type* = 0)
+<span class="lineNum">     237 </span>            : #endif  // _LIBCPP_HAS_NO_RVALUE_REFERENCES
+<span class="lineNum">     238 </span>            : {
+<span class="lineNum">     239 </span>            : #ifndef _LIBCPP_NO_EXCEPTIONS
+<span class="lineNum">     240 </span>            :     throw _VSTD::forward&lt;_Tp&gt;(__t);
+<span class="lineNum">     241 </span>            : #else
+<span class="lineNum">     242 </span>            :     ((void)__t);
+<span class="lineNum">     243 </span>            :     // FIXME: Make this abort
+<span class="lineNum">     244 </span>            : #endif
+<span class="lineNum">     245 </span>            : }
+<span class="lineNum">     246 </span>            : 
+<span class="lineNum">     247 </span>            : template &lt;class _Ep&gt;
+<span class="lineNum">     248 </span>            : inline _LIBCPP_INLINE_VISIBILITY
+<span class="lineNum">     249 </span>            : void
+<span class="lineNum">     250 </span>            : rethrow_if_nested(const _Ep&amp; __e, typename enable_if&lt;
+<span class="lineNum">     251 </span>            :                                    is_polymorphic&lt;_Ep&gt;::value
+<span class="lineNum">     252 </span>            :                                                    &gt;::type* = 0)
+<span class="lineNum">     253 </span>            : {
+<span class="lineNum">     254 </span>            :     const nested_exception* __nep = dynamic_cast&lt;const nested_exception*&gt;(_VSTD::addressof(__e));
+<span class="lineNum">     255 </span>            :     if (__nep)
+<span class="lineNum">     256 </span>            :         __nep-&gt;rethrow_nested();
+<span class="lineNum">     257 </span>            : }
+<span class="lineNum">     258 </span>            : 
+<span class="lineNum">     259 </span>            : template &lt;class _Ep&gt;
+<span class="lineNum">     260 </span>            : inline _LIBCPP_INLINE_VISIBILITY
+<span class="lineNum">     261 </span>            : void
+<span class="lineNum">     262 </span>            : rethrow_if_nested(const _Ep&amp;, typename enable_if&lt;
+<span class="lineNum">     263 </span>            :                                    !is_polymorphic&lt;_Ep&gt;::value
+<span class="lineNum">     264 </span>            :                                                    &gt;::type* = 0)
+<span class="lineNum">     265 </span>            : {
+<span class="lineNum">     266 </span>            : }
+<span class="lineNum">     267 </span>            : 
+<span class="lineNum">     268 </span>            : }  // std
+<span class="lineNum">     269 </span>            : 
+<span class="lineNum">     270 </span>            : #endif  // _LIBCPP_EXCEPTION
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

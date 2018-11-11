@@ -1,0 +1,597 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - /Users/ericandrews/Desktop/Folders/Work/F&M/Semester 1/CS3/HW1/eandrewsHW1/ReallyLongInt.cc</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../../../../../index.html">top level</a> - <a href="index.html">Users/ericandrews/Desktop/Folders/Work/F&amp;M/Semester 1/CS3/HW1/eandrewsHW1</a> - ReallyLongInt.cc<span style="font-size: 80%;"> (source / <a href="ReallyLongInt.cc.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">307</td>
+            <td class="headerCovTableEntry">336</td>
+            <td class="headerCovTableEntryHi">91.4 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-10-05 15:08:59</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">47</td>
+            <td class="headerCovTableEntry">51</td>
+            <td class="headerCovTableEntryHi">92.2 %</td>
+          </tr>
+          <tr><td><img src="../../../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include&lt;math.h&gt;</a>
+<span class="lineNum">       2 </span>            : #include &quot;ReallyLongInt.hpp&quot;
+<a name="3"><span class="lineNum">       3 </span>            : </a>
+<span class="lineNum">       4 </span>            : // private
+<span class="lineNum">       5 </span><span class="lineNoCov">          0 : ReallyLongInt::ReallyLongInt(unsigned int* digitArr, unsigned int arrSize, bool isNeg) {</span>
+<span class="lineNum">       6 </span><span class="lineNoCov">          0 :     removeLeadingZeros(digitArr, arrSize);</span>
+<span class="lineNum">       7 </span><span class="lineNoCov">          0 :     digits = digitArr;</span>
+<span class="lineNum">       8 </span><span class="lineNoCov">          0 :     numDigits = arrSize;</span>
+<span class="lineNum">       9 </span><span class="lineNoCov">          0 :     this-&gt;isNeg = digits[0] != 0 ? isNeg : false;</span>
+<a name="10"><span class="lineNum">      10 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      11 </span>            : 
+<span class="lineNum">      12 </span>            : void ReallyLongInt::removeLeadingZeros(unsigned int* x, unsigned int&amp; xSize) const {
+<span class="lineNum">      13 </span>            :     unsigned int i;
+<span class="lineNum">      14 </span>            :     unsigned int j;
+<span class="lineNum">      15 </span><span class="lineCov">        841 :     unsigned int tempSize = xSize; // size without leading zeros</span>
+<span class="lineNum">      16 </span><span class="lineCov">       2900 :     for (i = 0; i &lt; xSize; i++) {</span>
+<span class="lineNum">      17 </span>            :         // find size without leading zeros
+<span class="lineNum">      18 </span><span class="lineCov">       1370 :         if (x[i] == 0) {</span>
+<span class="lineNum">      19 </span><span class="lineCov">        609 :             tempSize--;</span>
+<span class="lineNum">      20 </span><span class="lineCov">        609 :         }</span>
+<span class="lineNum">      21 </span>            :         // shift all numbers to the front of the rlInt
+<span class="lineNum">      22 </span>            :         else {
+<span class="lineNum">      23 </span><span class="lineCov">       7756 :             for (j = 0; j &lt; tempSize; j++) {</span>
+<span class="lineNum">      24 </span><span class="lineCov">       3117 :                 x[j] = x[i + j];</span>
+<span class="lineNum">      25 </span><span class="lineCov">       3117 :             }</span>
+<span class="lineNum">      26 </span><span class="lineCov">        761 :             break;</span>
+<span class="lineNum">      27 </span>            :         }
+<span class="lineNum">      28 </span><span class="lineCov">        609 :     }</span>
+<span class="lineNum">      29 </span>            :     // zero case
+<span class="lineNum">      30 </span><span class="lineCov">        841 :     if (tempSize == 0) {</span>
+<span class="lineNum">      31 </span><span class="lineCov">         80 :         tempSize = 1;</span>
+<span class="lineNum">      32 </span><span class="lineCov">         80 :     }</span>
+<span class="lineNum">      33 </span>            :     // new size
+<span class="lineNum">      34 </span><span class="lineCov">        841 :     xSize = tempSize;</span>
+<a name="35"><span class="lineNum">      35 </span><span class="lineCov">        841 : }</span></a>
+<span class="lineNum">      36 </span>            : 
+<span class="lineNum">      37 </span>            : void ReallyLongInt::swap(ReallyLongInt other) {
+<span class="lineNum">      38 </span><span class="lineCov">       1460 :     std::swap(this-&gt;isNeg, other.isNeg);</span>
+<span class="lineNum">      39 </span><span class="lineCov">       1460 :     std::swap(this-&gt;digits, other.digits);</span>
+<span class="lineNum">      40 </span><span class="lineCov">       1460 :     std::swap(this-&gt;numDigits, other.numDigits);</span>
+<a name="41"><span class="lineNum">      41 </span><span class="lineCov">       1460 : }</span></a>
+<span class="lineNum">      42 </span>            : 
+<span class="lineNum">      43 </span>            : bool ReallyLongInt::absGreater(const ReallyLongInt&amp; other) const {
+<span class="lineNum">      44 </span>            :     // get different orders of magnitude out of the way
+<span class="lineNum">      45 </span><span class="lineCov">        938 :     if (numDigits &gt; other.numDigits) {</span>
+<span class="lineNum">      46 </span><span class="lineCov">        172 :         return true;</span>
+<span class="lineNum">      47 </span>            :     }
+<span class="lineNum">      48 </span><span class="lineCov">        766 :     if (other.numDigits &gt; numDigits) {</span>
+<span class="lineNum">      49 </span><span class="lineCov">        374 :         return false;</span>
+<span class="lineNum">      50 </span>            :     }
+<span class="lineNum">      51 </span>            :     // digit-by-digit comparison starting from the most significant and working down
+<span class="lineNum">      52 </span>            :     unsigned int i;
+<span class="lineNum">      53 </span><span class="lineCov">       1148 :     for (i = 0; i &lt; numDigits; i++) {</span>
+<span class="lineNum">      54 </span><span class="lineCov">        537 :         if (digits[i] &gt; other.digits[i]) {</span>
+<span class="lineNum">      55 </span><span class="lineCov">         95 :             return true;</span>
+<span class="lineNum">      56 </span>            :         }
+<span class="lineNum">      57 </span><span class="lineCov">        442 :         if (digits[i] &lt; other.digits[i]) {</span>
+<span class="lineNum">      58 </span><span class="lineCov">        260 :             return false;</span>
+<span class="lineNum">      59 </span>            :         }
+<span class="lineNum">      60 </span><span class="lineCov">        182 :     }</span>
+<span class="lineNum">      61 </span><span class="lineCov">         37 :     return false;</span>
+<a name="62"><span class="lineNum">      62 </span><span class="lineCov">        938 : }</span></a>
+<span class="lineNum">      63 </span>            : 
+<span class="lineNum">      64 </span>            : ReallyLongInt ReallyLongInt::absAdd(const ReallyLongInt&amp; other) const {
+<span class="lineNum">      65 </span>            :     unsigned int resultSize;
+<span class="lineNum">      66 </span><span class="lineCov">        164 :     if (this-&gt;absGreater(other)) {</span>
+<span class="lineNum">      67 </span><span class="lineCov">        100 :         resultSize = numDigits + 1;</span>
+<span class="lineNum">      68 </span><span class="lineCov">        100 :     }</span>
+<span class="lineNum">      69 </span>            :     else {
+<span class="lineNum">      70 </span><span class="lineCov">         64 :         resultSize = other.numDigits + 1;</span>
+<span class="lineNum">      71 </span>            :     }
+<span class="lineNum">      72 </span><span class="lineCov">        164 :     unsigned int* sum = new unsigned int[resultSize];</span>
+<span class="lineNum">      73 </span><span class="lineCov">        164 :     unsigned int carry = 0;</span>
+<span class="lineNum">      74 </span>            :     unsigned int i;
+<span class="lineNum">      75 </span>            :     unsigned int xDigit;
+<span class="lineNum">      76 </span>            :     unsigned int yDigit;
+<span class="lineNum">      77 </span>            :     unsigned int curDigit;
+<span class="lineNum">      78 </span>            :     ReallyLongInt* ret;
+<span class="lineNum">      79 </span><span class="lineCov">       2146 :     for (i = 0; i &lt; resultSize; i++) {</span>
+<span class="lineNum">      80 </span>            :         // get digits to add
+<span class="lineNum">      81 </span><span class="lineCov">        909 :         if (i &gt; numDigits - 1) {</span>
+<span class="lineNum">      82 </span><span class="lineCov">        173 :             xDigit = 0;</span>
+<span class="lineNum">      83 </span><span class="lineCov">        173 :         }</span>
+<span class="lineNum">      84 </span>            :         else {
+<span class="lineNum">      85 </span><span class="lineCov">        736 :             xDigit = digits[numDigits - 1 - i];</span>
+<span class="lineNum">      86 </span>            :         }
+<span class="lineNum">      87 </span><span class="lineCov">        909 :         if (i &gt; other.numDigits - 1) {</span>
+<span class="lineNum">      88 </span><span class="lineCov">        730 :             yDigit = 0;</span>
+<span class="lineNum">      89 </span><span class="lineCov">        730 :         }</span>
+<span class="lineNum">      90 </span>            :         else {
+<span class="lineNum">      91 </span><span class="lineCov">        179 :             yDigit = other.digits[other.numDigits - 1 - i];</span>
+<span class="lineNum">      92 </span>            :         }
+<span class="lineNum">      93 </span>            :         // add the digits
+<span class="lineNum">      94 </span><span class="lineCov">        909 :         curDigit = xDigit + yDigit + carry;</span>
+<span class="lineNum">      95 </span><span class="lineCov">        909 :         carry = 0;</span>
+<span class="lineNum">      96 </span>            :         // carry
+<span class="lineNum">      97 </span><span class="lineCov">        909 :         if (curDigit &gt; 9) {</span>
+<span class="lineNum">      98 </span><span class="lineCov">          6 :             sum[resultSize - 1 - i] = curDigit % 10;</span>
+<span class="lineNum">      99 </span><span class="lineCov">          6 :             carry = curDigit / 10;</span>
+<span class="lineNum">     100 </span><span class="lineCov">          6 :         }</span>
+<span class="lineNum">     101 </span>            :         else {
+<span class="lineNum">     102 </span><span class="lineCov">        903 :             sum[resultSize - 1 - i] = curDigit;</span>
+<span class="lineNum">     103 </span>            :         }
+<span class="lineNum">     104 </span><span class="lineCov">        909 :     }</span>
+<span class="lineNum">     105 </span><span class="lineCov">        164 :     removeLeadingZeros(sum, resultSize);</span>
+<span class="lineNum">     106 </span><span class="lineCov">        328 :     ret = new ReallyLongInt();</span>
+<span class="lineNum">     107 </span><span class="lineCov">        164 :     ret-&gt;isNeg = false;</span>
+<span class="lineNum">     108 </span><span class="lineCov">        164 :     ret-&gt;digits = sum;</span>
+<span class="lineNum">     109 </span><span class="lineCov">        164 :     ret-&gt;numDigits = resultSize;</span>
+<span class="lineNum">     110 </span><span class="lineCov">        328 :     delete[] sum;</span>
+<span class="lineNum">     111 </span><span class="lineCov">        164 :     return *ret;</span>
+<a name="112"><span class="lineNum">     112 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     113 </span>            : 
+<span class="lineNum">     114 </span>            : ReallyLongInt ReallyLongInt::absSub(const ReallyLongInt&amp; other) const {
+<span class="lineNum">     115 </span><span class="lineCov">        466 :     ReallyLongInt x; // larger operand</span>
+<span class="lineNum">     116 </span><span class="lineCov">        466 :     ReallyLongInt y; // smaller operand</span>
+<span class="lineNum">     117 </span>            :     bool retIsNeg;
+<span class="lineNum">     118 </span>            :     unsigned int difDigits;
+<span class="lineNum">     119 </span>            :     unsigned int* dif;
+<span class="lineNum">     120 </span>            :     unsigned int i;
+<span class="lineNum">     121 </span>            :     unsigned int borrowIndex;
+<span class="lineNum">     122 </span>            :     ReallyLongInt* ret;
+<span class="lineNum">     123 </span><span class="lineCov">        932 :     if (other.absGreater(*this)) {</span>
+<span class="lineNum">     124 </span><span class="lineCov">          4 :         x = other;</span>
+<span class="lineNum">     125 </span><span class="lineCov">          4 :         y = *this;</span>
+<span class="lineNum">     126 </span><span class="lineCov">          4 :         retIsNeg = true;</span>
+<span class="lineNum">     127 </span><span class="lineCov">          4 :     }</span>
+<span class="lineNum">     128 </span>            :     else {
+<span class="lineNum">     129 </span><span class="lineCov">        462 :         y = other;</span>
+<span class="lineNum">     130 </span><span class="lineCov">        462 :         x = *this;</span>
+<span class="lineNum">     131 </span><span class="lineCov">        462 :         retIsNeg = false;</span>
+<span class="lineNum">     132 </span>            :     }
+<span class="lineNum">     133 </span>            :     // std::cout &lt;&lt; &quot;x: &quot; &lt;&lt; x &lt;&lt; &quot; y: &quot; &lt;&lt; y &lt;&lt; std::endl;
+<span class="lineNum">     134 </span><span class="lineCov">        466 :     difDigits = x.numDigits;</span>
+<span class="lineNum">     135 </span><span class="lineCov">        932 :     dif = new unsigned int[difDigits];</span>
+<span class="lineNum">     136 </span><span class="lineCov">       4574 :     for (i = 0; i &lt; difDigits; i++) {</span>
+<span class="lineNum">     137 </span><span class="lineCov">       1821 :         dif[i] = x.digits[i];</span>
+<span class="lineNum">     138 </span><span class="lineCov">       1821 :     }</span>
+<span class="lineNum">     139 </span><span class="lineCov">       2340 :     for (i = 0; i &lt; y.numDigits; i++) {</span>
+<span class="lineNum">     140 </span><span class="lineCov">        704 :         if (dif[difDigits - 1 - i] &lt; y.digits[y.numDigits - 1 - i]) {</span>
+<span class="lineNum">     141 </span>            :             // need to borrow
+<span class="lineNum">     142 </span><span class="lineCov">        116 :             borrowIndex = difDigits - 1 - i;</span>
+<span class="lineNum">     143 </span><span class="lineCov">        116 :             dif[borrowIndex] += 10;</span>
+<span class="lineNum">     144 </span><span class="lineCov">        116 :             borrowIndex--;</span>
+<span class="lineNum">     145 </span><span class="lineCov">        246 :             while (dif[borrowIndex] == 0) {</span>
+<span class="lineNum">     146 </span><span class="lineCov">          7 :                 dif[borrowIndex] = 9;</span>
+<span class="lineNum">     147 </span><span class="lineCov">          7 :                 borrowIndex--;</span>
+<span class="lineNum">     148 </span>            :             }
+<span class="lineNum">     149 </span><span class="lineCov">        116 :             dif[borrowIndex]--;</span>
+<span class="lineNum">     150 </span><span class="lineCov">        116 :         }</span>
+<span class="lineNum">     151 </span><span class="lineCov">        704 :         dif[difDigits - 1 - i] -= y.digits[y.numDigits - 1 - i];</span>
+<span class="lineNum">     152 </span><span class="lineCov">        704 :     }</span>
+<span class="lineNum">     153 </span><span class="lineCov">        466 :     removeLeadingZeros(dif, difDigits);</span>
+<span class="lineNum">     154 </span><span class="lineCov">       1398 :     ret = new ReallyLongInt();</span>
+<span class="lineNum">     155 </span><span class="lineCov">        466 :     ret-&gt;isNeg = retIsNeg;</span>
+<span class="lineNum">     156 </span><span class="lineCov">        466 :     ret-&gt;digits = dif;</span>
+<span class="lineNum">     157 </span><span class="lineCov">        466 :     ret-&gt;numDigits = difDigits;</span>
+<span class="lineNum">     158 </span><span class="lineCov">        932 :     delete[] dif;</span>
+<span class="lineNum">     159 </span><span class="lineCov">        466 :     return *ret;</span>
+<a name="160"><span class="lineNum">     160 </span><span class="lineCov">        932 : }</span></a>
+<span class="lineNum">     161 </span>            : 
+<span class="lineNum">     162 </span>            : ReallyLongInt ReallyLongInt::absMult(const ReallyLongInt&amp; other) const {
+<span class="lineNum">     163 </span><span class="lineCov">        160 :     unsigned int prodNumDigits = this-&gt;numDigits + other.numDigits;</span>
+<span class="lineNum">     164 </span><span class="lineCov">        160 :     unsigned int* prod = new unsigned int[prodNumDigits];</span>
+<span class="lineNum">     165 </span>            :     unsigned int i;
+<span class="lineNum">     166 </span>            :     unsigned int j;
+<span class="lineNum">     167 </span>            :     unsigned int carry;
+<span class="lineNum">     168 </span>            :     unsigned int curDigit;
+<span class="lineNum">     169 </span>            :     unsigned int sum;
+<span class="lineNum">     170 </span><span class="lineCov">       2030 :     for (i = 0; i &lt; prodNumDigits; i++) {</span>
+<span class="lineNum">     171 </span><span class="lineCov">        855 :         prod[i] = 0;</span>
+<span class="lineNum">     172 </span><span class="lineCov">        855 :     }</span>
+<span class="lineNum">     173 </span><span class="lineCov">       1392 :     for (i = 0; i &lt; this-&gt;numDigits; i++) {</span>
+<span class="lineNum">     174 </span><span class="lineCov">        536 :         carry = 0;</span>
+<span class="lineNum">     175 </span><span class="lineCov">       3258 :         for (j = 0; j &lt; other.numDigits; j++) {</span>
+<span class="lineNum">     176 </span><span class="lineCov">       1093 :             curDigit = prodNumDigits - i - j - 1;</span>
+<span class="lineNum">     177 </span><span class="lineCov">       2186 :             sum = prod[curDigit] + carry + this-&gt;digits[this-&gt;numDigits - 1 - i] *</span>
+<span class="lineNum">     178 </span><span class="lineCov">       1093 :                 other.digits[other.numDigits - 1 - j];</span>
+<span class="lineNum">     179 </span><span class="lineCov">       1093 :             prod[curDigit] = sum % 10;</span>
+<span class="lineNum">     180 </span><span class="lineCov">       1093 :             carry = sum / 10;</span>
+<span class="lineNum">     181 </span><span class="lineCov">       1093 :         }</span>
+<span class="lineNum">     182 </span><span class="lineCov">        536 :         prod[this-&gt;numDigits - 1 - i] += carry;</span>
+<span class="lineNum">     183 </span><span class="lineCov">        536 :     }</span>
+<span class="lineNum">     184 </span><span class="lineCov">        160 :     removeLeadingZeros(prod, prodNumDigits);</span>
+<span class="lineNum">     185 </span><span class="lineCov">        320 :     ReallyLongInt* ret = new ReallyLongInt();</span>
+<span class="lineNum">     186 </span><span class="lineCov">        160 :     ret-&gt;digits = prod;</span>
+<span class="lineNum">     187 </span><span class="lineCov">        160 :     ret-&gt;numDigits = prodNumDigits;</span>
+<span class="lineNum">     188 </span><span class="lineCov">        320 :     delete[] prod;</span>
+<span class="lineNum">     189 </span><span class="lineCov">        160 :     return *ret;</span>
+<a name="190"><span class="lineNum">     190 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     191 </span>            : 
+<span class="lineNum">     192 </span>            : void ReallyLongInt::absDiv(const ReallyLongInt&amp; other, ReallyLongInt&amp; quotient,
+<span class="lineNum">     193 </span>            :                         ReallyLongInt&amp; remainder) const {
+<span class="lineNum">     194 </span><span class="lineCov">         49 :     unsigned int quotSize = numDigits;</span>
+<span class="lineNum">     195 </span><span class="lineCov">         49 :     unsigned int* quotDigits = new unsigned int[quotSize];</span>
+<span class="lineNum">     196 </span>            :     unsigned int i;
+<span class="lineNum">     197 </span>            :     unsigned int digit;
+<span class="lineNum">     198 </span><span class="lineCov">         98 :     remainder = 0;</span>
+<span class="lineNum">     199 </span><span class="lineCov">        374 :     for (i = 0; i &lt; numDigits; ++i) {</span>
+<span class="lineNum">     200 </span><span class="lineCov">        552 :         remainder = remainder.absMult(10);</span>
+<span class="lineNum">     201 </span><span class="lineCov">        552 :         remainder = remainder.absAdd(digits[i]);</span>
+<span class="lineNum">     202 </span><span class="lineCov">        138 :         digit = 0;</span>
+<span class="lineNum">     203 </span><span class="lineCov">       1475 :         while (remainder.absGreater(other.absSub(1))) {</span>
+<span class="lineNum">     204 </span><span class="lineCov">        314 :             remainder = remainder.absSub(other);</span>
+<span class="lineNum">     205 </span><span class="lineCov">        157 :             ++digit;</span>
+<span class="lineNum">     206 </span>            :         }
+<span class="lineNum">     207 </span><span class="lineCov">        138 :         quotDigits[i] = digit;</span>
+<span class="lineNum">     208 </span><span class="lineCov">        138 :     }</span>
+<span class="lineNum">     209 </span><span class="lineCov">         49 :     removeLeadingZeros(quotDigits, quotSize);</span>
+<span class="lineNum">     210 </span><span class="lineCov">         49 :     quotient.digits = quotDigits;</span>
+<span class="lineNum">     211 </span><span class="lineCov">         49 :     quotient.numDigits = quotSize;</span>
+<a name="212"><span class="lineNum">     212 </span><span class="lineCov">         49 : }</span></a>
+<span class="lineNum">     213 </span>            :     
+<span class="lineNum">     214 </span>            : void ReallyLongInt::flipSign() {
+<span class="lineNum">     215 </span><span class="lineCov">         30 :     if (*this != 0) {</span>
+<span class="lineNum">     216 </span><span class="lineCov">         13 :         isNeg = !isNeg;</span>
+<span class="lineNum">     217 </span><span class="lineCov">         13 :     }</span>
+<span class="lineNum">     218 </span><span class="lineCov">         15 : }</span>
+<a name="219"><span class="lineNum">     219 </span>            : </a>
+<span class="lineNum">     220 </span>            : // public
+<span class="lineNum">     221 </span><span class="lineCov">       1842 : ReallyLongInt::ReallyLongInt() {</span>
+<span class="lineNum">     222 </span>            :     // creates a rlInt equal to 0
+<span class="lineNum">     223 </span><span class="lineCov">       1842 :     isNeg = false;</span>
+<span class="lineNum">     224 </span><span class="lineCov">       1842 :     unsigned int* tempDigits = new unsigned int[1];</span>
+<span class="lineNum">     225 </span><span class="lineCov">       1842 :     tempDigits[0] = 0;</span>
+<span class="lineNum">     226 </span><span class="lineCov">       1842 :     digits = tempDigits;</span>
+<span class="lineNum">     227 </span><span class="lineCov">       1842 :     numDigits = 1;</span>
+<a name="228"><span class="lineNum">     228 </span><span class="lineCov">       3684 : }</span></a>
+<span class="lineNum">     229 </span>            : 
+<span class="lineNum">     230 </span><span class="lineCov">        782 : ReallyLongInt::ReallyLongInt(long long num) {</span>
+<span class="lineNum">     231 </span>            :     // creates a rlInt equal to num
+<span class="lineNum">     232 </span>            :     long long tempNum;
+<span class="lineNum">     233 </span>            :     unsigned int i;
+<span class="lineNum">     234 </span>            :     unsigned int* tempDigits;
+<span class="lineNum">     235 </span>            :     int digitIndex;
+<span class="lineNum">     236 </span><span class="lineCov">        782 :     if (num &lt; 0) {</span>
+<span class="lineNum">     237 </span><span class="lineCov">         24 :         isNeg = true;</span>
+<span class="lineNum">     238 </span><span class="lineCov">         24 :         tempNum = num * -1;</span>
+<span class="lineNum">     239 </span><span class="lineCov">         24 :     }</span>
+<span class="lineNum">     240 </span>            :     else {
+<span class="lineNum">     241 </span><span class="lineCov">        758 :         isNeg = false;</span>
+<span class="lineNum">     242 </span><span class="lineCov">        758 :         tempNum = num;</span>
+<span class="lineNum">     243 </span>            :     }
+<span class="lineNum">     244 </span><span class="lineCov">        782 :     if (num == 0) {</span>
+<span class="lineNum">     245 </span><span class="lineCov">        114 :         numDigits = 1;</span>
+<span class="lineNum">     246 </span><span class="lineCov">        114 :     }</span>
+<span class="lineNum">     247 </span>            :     else {
+<span class="lineNum">     248 </span><span class="lineCov">        668 :         numDigits = log10(tempNum) / 1 + 1;</span>
+<span class="lineNum">     249 </span>            :     }
+<span class="lineNum">     250 </span><span class="lineCov">        782 :     tempDigits = new unsigned int[numDigits];</span>
+<span class="lineNum">     251 </span><span class="lineCov">        782 :     digitIndex = numDigits - 1;</span>
+<span class="lineNum">     252 </span><span class="lineCov">       3782 :     for (i = 0; i &lt; numDigits; i++) {</span>
+<span class="lineNum">     253 </span><span class="lineCov">       1109 :         tempDigits[digitIndex - i] = tempNum % 10;</span>
+<span class="lineNum">     254 </span><span class="lineCov">       1109 :         tempNum = tempNum / 10;</span>
+<span class="lineNum">     255 </span><span class="lineCov">       1109 :     }</span>
+<span class="lineNum">     256 </span><span class="lineCov">        782 :     digits = tempDigits;</span>
+<a name="257"><span class="lineNum">     257 </span><span class="lineCov">       1564 : }</span></a>
+<span class="lineNum">     258 </span>            : 
+<span class="lineNum">     259 </span><span class="lineCov">          2 : ReallyLongInt::ReallyLongInt(const string&amp; numStr) {</span>
+<span class="lineNum">     260 </span><span class="lineCov">          2 :     numDigits = numStr.size();</span>
+<span class="lineNum">     261 </span><span class="lineCov">          2 :     unsigned int* longNum = new unsigned int[numDigits];</span>
+<span class="lineNum">     262 </span><span class="lineCov">          2 :     unsigned int i = 0;</span>
+<span class="lineNum">     263 </span><span class="lineCov">          2 :     if (numStr[0] == '-') {</span>
+<span class="lineNum">     264 </span><span class="lineCov">          1 :         i = 1;</span>
+<span class="lineNum">     265 </span><span class="lineCov">          1 :         longNum[0] = 0;</span>
+<span class="lineNum">     266 </span><span class="lineCov">          1 :         isNeg = numStr[1] != '0' ? true : false;</span>
+<span class="lineNum">     267 </span><span class="lineCov">          1 :     }</span>
+<span class="lineNum">     268 </span>            :     else {
+<span class="lineNum">     269 </span><span class="lineCov">          1 :         isNeg = false;</span>
+<span class="lineNum">     270 </span>            :     }
+<span class="lineNum">     271 </span><span class="lineCov">          8 :     for (; i &lt; numDigits; ++i) {</span>
+<span class="lineNum">     272 </span><span class="lineCov">          2 :         longNum[i] = numStr[i] - 48;</span>
+<span class="lineNum">     273 </span><span class="lineCov">          2 :     }</span>
+<span class="lineNum">     274 </span><span class="lineCov">          2 :     removeLeadingZeros(longNum, numDigits);</span>
+<span class="lineNum">     275 </span><span class="lineCov">          2 :     digits = longNum;</span>
+<a name="276"><span class="lineNum">     276 </span><span class="lineCov">          4 : }</span></a>
+<span class="lineNum">     277 </span>            : 
+<span class="lineNum">     278 </span><span class="lineCov">       2326 : ReallyLongInt::ReallyLongInt(const ReallyLongInt&amp; other) {</span>
+<span class="lineNum">     279 </span>            :     unsigned int i;
+<span class="lineNum">     280 </span>            :     unsigned int* temp;
+<span class="lineNum">     281 </span><span class="lineCov">       2326 :     numDigits = other.numDigits;</span>
+<span class="lineNum">     282 </span><span class="lineCov">       2326 :     isNeg = other.isNeg;</span>
+<span class="lineNum">     283 </span><span class="lineCov">       2326 :     temp = new unsigned int[numDigits];</span>
+<span class="lineNum">     284 </span><span class="lineCov">      20026 :     for (i = 0; i &lt; numDigits; i++) {</span>
+<span class="lineNum">     285 </span><span class="lineCov">       7687 :         temp[i] = other.digits[i];</span>
+<span class="lineNum">     286 </span><span class="lineCov">       7687 :     }</span>
+<span class="lineNum">     287 </span><span class="lineCov">       2326 :     digits = temp;</span>
+<a name="288"><span class="lineNum">     288 </span><span class="lineCov">       4652 : }</span></a>
+<span class="lineNum">     289 </span>            : 
+<span class="lineNum">     290 </span><span class="lineCov">       4016 : ReallyLongInt::~ReallyLongInt() {</span>
+<span class="lineNum">     291 </span><span class="lineCov">       8032 :     delete[](digits);</span>
+<a name="292"><span class="lineNum">     292 </span><span class="lineCov">       8032 : }</span></a>
+<span class="lineNum">     293 </span>            : 
+<span class="lineNum">     294 </span>            : long long ReallyLongInt::toLongLong() const {
+<span class="lineNum">     295 </span><span class="lineCov">          8 :     ReallyLongInt* temp = new ReallyLongInt(*this);</span>
+<span class="lineNum">     296 </span><span class="lineCov">          8 :     ReallyLongInt* max = new ReallyLongInt(LLONG_MAX);</span>
+<span class="lineNum">     297 </span><span class="lineCov">          8 :     ReallyLongInt* maxPlus = new ReallyLongInt(*max);</span>
+<span class="lineNum">     298 </span><span class="lineCov">          4 :     ++(*maxPlus);</span>
+<span class="lineNum">     299 </span><span class="lineCov">         10 :     while (*temp &gt; *max) {</span>
+<span class="lineNum">     300 </span><span class="lineCov">          1 :         *temp %= *maxPlus;</span>
+<span class="lineNum">     301 </span>            :     }
+<span class="lineNum">     302 </span><span class="lineCov">          4 :     long long ret = 0;</span>
+<span class="lineNum">     303 </span>            :     unsigned int i;
+<span class="lineNum">     304 </span><span class="lineCov">         56 :     for (i = 0; i &lt; temp-&gt;numDigits; i++) {</span>
+<span class="lineNum">     305 </span><span class="lineCov">         24 :         ret *= 10;</span>
+<span class="lineNum">     306 </span><span class="lineCov">         24 :         ret += temp-&gt;digits[i];</span>
+<span class="lineNum">     307 </span><span class="lineCov">         24 :     }</span>
+<span class="lineNum">     308 </span><span class="lineCov">          4 :     if (isNeg) {</span>
+<span class="lineNum">     309 </span><span class="lineCov">          1 :         ret *= -1;</span>
+<span class="lineNum">     310 </span><span class="lineCov">          1 :     }</span>
+<span class="lineNum">     311 </span><span class="lineCov">         12 :     delete temp;</span>
+<span class="lineNum">     312 </span><span class="lineCov">         12 :     delete max;</span>
+<span class="lineNum">     313 </span><span class="lineCov">         12 :     delete maxPlus;</span>
+<span class="lineNum">     314 </span><span class="lineCov">          4 :     return ret;</span>
+<a name="315"><span class="lineNum">     315 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     316 </span>            : 
+<span class="lineNum">     317 </span>            : bool ReallyLongInt::equal(const ReallyLongInt&amp; other) const {
+<span class="lineNum">     318 </span>            :     // ASSUMES LEADING ZEROS ARE STRIPPED
+<span class="lineNum">     319 </span>            :     // can't be equal if they're different sizes
+<span class="lineNum">     320 </span><span class="lineCov">         99 :     if (numDigits != other.numDigits) {</span>
+<span class="lineNum">     321 </span><span class="lineCov">         17 :         return false;</span>
+<span class="lineNum">     322 </span>            :     }
+<span class="lineNum">     323 </span>            :     // can't be equal if they're a different sign
+<span class="lineNum">     324 </span><span class="lineCov">         82 :     if (isNeg ^ other.isNeg) { // i like bitwise operators. sue me.</span>
+<span class="lineNum">     325 </span><span class="lineCov">          1 :         return false;</span>
+<span class="lineNum">     326 </span>            :     }
+<span class="lineNum">     327 </span>            :     // digit-by-digit comparison; direction doesn't matter
+<span class="lineNum">     328 </span>            :     unsigned int i;
+<span class="lineNum">     329 </span><span class="lineCov">        384 :     for (i = 0; i &lt; numDigits; i++) {</span>
+<span class="lineNum">     330 </span><span class="lineCov">        135 :         if (digits[i] != other.digits[i]) {</span>
+<span class="lineNum">     331 </span><span class="lineCov">         24 :             return false;</span>
+<span class="lineNum">     332 </span>            :         }
+<span class="lineNum">     333 </span><span class="lineCov">        111 :     }</span>
+<span class="lineNum">     334 </span><span class="lineCov">         57 :     return true;</span>
+<a name="335"><span class="lineNum">     335 </span><span class="lineCov">         99 : }</span></a>
+<span class="lineNum">     336 </span>            : 
+<span class="lineNum">     337 </span>            : bool ReallyLongInt::greater(const ReallyLongInt &amp;other) const {
+<span class="lineNum">     338 </span><span class="lineCov">         17 :     if (isNeg ^ other.isNeg) {</span>
+<span class="lineNum">     339 </span><span class="lineCov">          4 :         return other.isNeg;</span>
+<span class="lineNum">     340 </span>            :     }
+<span class="lineNum">     341 </span><span class="lineCov">         13 :     if (isNeg) {</span>
+<span class="lineNum">     342 </span><span class="lineCov">          1 :         if (this-&gt;equal(other)) {</span>
+<span class="lineNum">     343 </span><span class="lineNoCov">          0 :             return false;</span>
+<span class="lineNum">     344 </span>            :         }
+<span class="lineNum">     345 </span><span class="lineCov">          1 :         return !absGreater(other);</span>
+<span class="lineNum">     346 </span>            :     }
+<span class="lineNum">     347 </span><span class="lineCov">         12 :     return absGreater(other);</span>
+<a name="348"><span class="lineNum">     348 </span><span class="lineCov">         17 : }</span></a>
+<span class="lineNum">     349 </span>            : 
+<span class="lineNum">     350 </span>            : ReallyLongInt ReallyLongInt::add(const ReallyLongInt &amp;other) const {
+<span class="lineNum">     351 </span><span class="lineCov">         22 :     if (isNeg &amp;&amp; other.isNeg) {</span>
+<span class="lineNum">     352 </span><span class="lineCov">          1 :         ReallyLongInt ret = this-&gt;absAdd(other);</span>
+<span class="lineNum">     353 </span><span class="lineCov">          1 :         ret.flipSign();</span>
+<span class="lineNum">     354 </span><span class="lineCov">          1 :         return ret;</span>
+<span class="lineNum">     355 </span><span class="lineCov">          1 :     }</span>
+<span class="lineNum">     356 </span><span class="lineCov">         19 :     if (isNeg) {</span>
+<span class="lineNum">     357 </span><span class="lineCov">          1 :         return other.absSub(*this);</span>
+<span class="lineNum">     358 </span>            :     }
+<span class="lineNum">     359 </span><span class="lineCov">         18 :     if (other.isNeg) {</span>
+<span class="lineNum">     360 </span><span class="lineCov">          4 :         return this-&gt;absSub(other);</span>
+<span class="lineNum">     361 </span>            :     }
+<span class="lineNum">     362 </span><span class="lineCov">         14 :     return this-&gt;absAdd(other);</span>
+<a name="363"><span class="lineNum">     363 </span><span class="lineCov">         20 : }</span></a>
+<span class="lineNum">     364 </span>            : 
+<span class="lineNum">     365 </span>            : ReallyLongInt ReallyLongInt::sub(const ReallyLongInt &amp;other) const {
+<span class="lineNum">     366 </span><span class="lineCov">         25 :     if (isNeg &amp;&amp; other.isNeg) {</span>
+<span class="lineNum">     367 </span><span class="lineCov">          1 :         return other.absSub(*this);</span>
+<span class="lineNum">     368 </span>            :     }
+<span class="lineNum">     369 </span><span class="lineCov">         19 :     if (isNeg) {</span>
+<span class="lineNum">     370 </span><span class="lineCov">          4 :         ReallyLongInt ret = this-&gt;absAdd(other);</span>
+<span class="lineNum">     371 </span><span class="lineCov">          4 :         ret.flipSign();</span>
+<span class="lineNum">     372 </span><span class="lineCov">          4 :         return ret;</span>
+<span class="lineNum">     373 </span><span class="lineCov">          4 :     }</span>
+<span class="lineNum">     374 </span><span class="lineCov">         15 :     if (other.isNeg) {</span>
+<span class="lineNum">     375 </span><span class="lineCov">          7 :         return this-&gt;absAdd(other);</span>
+<span class="lineNum">     376 </span>            :     }
+<span class="lineNum">     377 </span><span class="lineCov">          8 :     return this-&gt;absSub(other);</span>
+<a name="378"><span class="lineNum">     378 </span><span class="lineCov">         20 : }</span></a>
+<span class="lineNum">     379 </span>            : 
+<span class="lineNum">     380 </span>            : ReallyLongInt ReallyLongInt::mult(const ReallyLongInt &amp;other) const {
+<span class="lineNum">     381 </span><span class="lineCov">         22 :     ReallyLongInt ret = this-&gt;absMult(other);</span>
+<span class="lineNum">     382 </span><span class="lineCov">         94 :     if (isNeg ^ other.isNeg &amp;&amp; ret != 0) {</span>
+<span class="lineNum">     383 </span><span class="lineCov">          6 :         ret.flipSign();</span>
+<span class="lineNum">     384 </span><span class="lineCov">          6 :     }</span>
+<span class="lineNum">     385 </span><span class="lineCov">         22 :     return ret;</span>
+<a name="386"><span class="lineNum">     386 </span><span class="lineCov">         44 : }</span></a>
+<span class="lineNum">     387 </span>            : 
+<span class="lineNum">     388 </span>            : void ReallyLongInt::div(const ReallyLongInt&amp; denominator, ReallyLongInt&amp; quotient,
+<span class="lineNum">     389 </span>            :                         ReallyLongInt&amp; remainder) const {
+<span class="lineNum">     390 </span><span class="lineCov">         49 :     this-&gt;absDiv(denominator, quotient, remainder);</span>
+<span class="lineNum">     391 </span><span class="lineCov">         49 :     if (isNeg ^ denominator.isNeg) {</span>
+<span class="lineNum">     392 </span><span class="lineCov">          3 :         quotient.flipSign();</span>
+<span class="lineNum">     393 </span><span class="lineCov">          3 :     }</span>
+<span class="lineNum">     394 </span><span class="lineCov">         49 :     if (isNeg) {</span>
+<span class="lineNum">     395 </span><span class="lineCov">          1 :         remainder.flipSign();</span>
+<span class="lineNum">     396 </span><span class="lineCov">          1 :     }</span>
+<a name="397"><span class="lineNum">     397 </span><span class="lineCov">         49 : }</span></a>
+<span class="lineNum">     398 </span>            : 
+<span class="lineNum">     399 </span>            : ReallyLongInt ReallyLongInt::operator-() const {
+<span class="lineNum">     400 </span><span class="lineCov">          6 :     ReallyLongInt* ret = new ReallyLongInt(*this);</span>
+<span class="lineNum">     401 </span><span class="lineCov">          3 :     ret-&gt;isNeg = !ret-&gt;isNeg;</span>
+<span class="lineNum">     402 </span><span class="lineCov">          3 :     return *ret;</span>
+<a name="403"><span class="lineNum">     403 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     404 </span>            : 
+<span class="lineNum">     405 </span>            : ReallyLongInt&amp; ReallyLongInt::operator=(const ReallyLongInt&amp; other) {
+<span class="lineNum">     406 </span><span class="lineCov">       2920 :     swap(other);</span>
+<span class="lineNum">     407 </span><span class="lineCov">       1460 :     return *this;</span>
+<a name="408"><span class="lineNum">     408 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     409 </span>            : 
+<span class="lineNum">     410 </span>            : ReallyLongInt&amp; ReallyLongInt::operator+=(const ReallyLongInt &amp;other) {
+<span class="lineNum">     411 </span><span class="lineCov">          6 :     *this = *this + other;</span>
+<span class="lineNum">     412 </span><span class="lineCov">          3 :     return *this;</span>
+<a name="413"><span class="lineNum">     413 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     414 </span>            : 
+<span class="lineNum">     415 </span>            : ReallyLongInt&amp; ReallyLongInt::operator-=(const ReallyLongInt &amp;other) {
+<span class="lineNum">     416 </span><span class="lineCov">          6 :     *this = *this - other;</span>
+<span class="lineNum">     417 </span><span class="lineCov">          3 :     return *this;</span>
+<a name="418"><span class="lineNum">     418 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     419 </span>            : 
+<span class="lineNum">     420 </span>            : ReallyLongInt&amp; ReallyLongInt::operator*=(const ReallyLongInt &amp;other) {
+<span class="lineNum">     421 </span><span class="lineCov">          6 :     *this = *this * other;</span>
+<span class="lineNum">     422 </span><span class="lineCov">          3 :     return *this;</span>
+<a name="423"><span class="lineNum">     423 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     424 </span>            : 
+<span class="lineNum">     425 </span>            : ReallyLongInt&amp; ReallyLongInt::operator/=(const ReallyLongInt &amp;other) {
+<span class="lineNum">     426 </span><span class="lineCov">          2 :     *this = *this / other;</span>
+<span class="lineNum">     427 </span><span class="lineCov">          1 :     return *this;</span>
+<a name="428"><span class="lineNum">     428 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     429 </span>            : 
+<span class="lineNum">     430 </span>            : ReallyLongInt&amp; ReallyLongInt::operator%=(const ReallyLongInt &amp;other) {
+<span class="lineNum">     431 </span><span class="lineCov">          2 :     *this = *this % other;</span>
+<span class="lineNum">     432 </span><span class="lineCov">          1 :     return *this;</span>
+<a name="433"><span class="lineNum">     433 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     434 </span>            : 
+<span class="lineNum">     435 </span>            : ReallyLongInt&amp; ReallyLongInt::operator++() {
+<span class="lineNum">     436 </span><span class="lineCov">         44 :     *this = *this + 1;</span>
+<span class="lineNum">     437 </span><span class="lineCov">         11 :     return *this;</span>
+<a name="438"><span class="lineNum">     438 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     439 </span>            : 
+<span class="lineNum">     440 </span>            : ReallyLongInt&amp; ReallyLongInt::operator--() {
+<span class="lineNum">     441 </span><span class="lineCov">          4 :     *this = *this - 1;</span>
+<span class="lineNum">     442 </span><span class="lineCov">          1 :     return *this;</span>
+<a name="443"><span class="lineNum">     443 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     444 </span>            : 
+<span class="lineNum">     445 </span>            : ReallyLongInt ReallyLongInt::operator++(int dummy) {
+<span class="lineNum">     446 </span><span class="lineCov">          1 :     ReallyLongInt ret = *this;</span>
+<span class="lineNum">     447 </span><span class="lineCov">          5 :     *this = *this + 1;</span>
+<span class="lineNum">     448 </span><span class="lineCov">          1 :     return ret;</span>
+<a name="449"><span class="lineNum">     449 </span><span class="lineCov">          2 : }</span></a>
+<span class="lineNum">     450 </span>            : 
+<span class="lineNum">     451 </span>            : ReallyLongInt ReallyLongInt::operator--(int dummy) {
+<span class="lineNum">     452 </span><span class="lineCov">          1 :     ReallyLongInt ret = *this;</span>
+<span class="lineNum">     453 </span><span class="lineCov">          5 :     *this = *this - 1;</span>
+<span class="lineNum">     454 </span><span class="lineCov">          1 :     return ret;</span>
+<a name="455"><span class="lineNum">     455 </span><span class="lineCov">          2 : }</span></a>
+<span class="lineNum">     456 </span>            : 
+<span class="lineNum">     457 </span>            : ostream&amp; ReallyLongInt::print(ostream&amp; out) const {
+<span class="lineNum">     458 </span>            :     unsigned int i;
+<span class="lineNum">     459 </span><span class="lineNoCov">          0 :     if (isNeg) {</span>
+<span class="lineNum">     460 </span><span class="lineNoCov">          0 :         out &lt;&lt; '-';</span>
+<span class="lineNum">     461 </span><span class="lineNoCov">          0 :     }</span>
+<span class="lineNum">     462 </span><span class="lineNoCov">          0 :     for (i = 0; i &lt; numDigits; i++) {</span>
+<span class="lineNum">     463 </span><span class="lineNoCov">          0 :         out &lt;&lt; digits[i];</span>
+<span class="lineNum">     464 </span><span class="lineNoCov">          0 :     }</span>
+<span class="lineNum">     465 </span><span class="lineNoCov">          0 :     return out;</span>
+<span class="lineNum">     466 </span>            : }
+<a name="467"><span class="lineNum">     467 </span>            : </a>
+<span class="lineNum">     468 </span>            : // independent functions
+<span class="lineNum">     469 </span>            : bool operator==(const ReallyLongInt&amp; x, const ReallyLongInt&amp; y) {
+<span class="lineNum">     470 </span><span class="lineCov">         66 :     return x.equal(y);</span>
+<a name="471"><span class="lineNum">     471 </span>            : }</a>
+<span class="lineNum">     472 </span>            : 
+<span class="lineNum">     473 </span>            : bool operator!=(const ReallyLongInt&amp; x, const ReallyLongInt&amp; y) {
+<span class="lineNum">     474 </span><span class="lineCov">         25 :     return !x.equal(y);</span>
+<a name="475"><span class="lineNum">     475 </span>            : }</a>
+<span class="lineNum">     476 </span>            : 
+<span class="lineNum">     477 </span>            : bool operator&gt;(const ReallyLongInt&amp; x, const ReallyLongInt&amp; y) {
+<span class="lineNum">     478 </span><span class="lineCov">          7 :     return x.greater(y);</span>
+<a name="479"><span class="lineNum">     479 </span>            : }</a>
+<span class="lineNum">     480 </span>            : 
+<span class="lineNum">     481 </span>            : bool operator&lt;(const ReallyLongInt&amp; x, const ReallyLongInt&amp; y) {
+<span class="lineNum">     482 </span><span class="lineCov">          6 :     return y.greater(x);</span>
+<a name="483"><span class="lineNum">     483 </span>            : }</a>
+<span class="lineNum">     484 </span>            : 
+<span class="lineNum">     485 </span>            : bool operator&gt;=(const ReallyLongInt&amp; x, const ReallyLongInt&amp; y) {
+<span class="lineNum">     486 </span><span class="lineCov">          2 :     return x.equal(y) || x.greater(y);</span>
+<a name="487"><span class="lineNum">     487 </span>            : }</a>
+<span class="lineNum">     488 </span>            : 
+<span class="lineNum">     489 </span>            : bool operator&lt;=(const ReallyLongInt&amp; x, const ReallyLongInt&amp; y) {
+<span class="lineNum">     490 </span><span class="lineCov">         16 :     return x.equal(y) || y.greater(x);</span>
+<a name="491"><span class="lineNum">     491 </span>            : }</a>
+<span class="lineNum">     492 </span>            : 
+<span class="lineNum">     493 </span>            : ReallyLongInt operator+(const ReallyLongInt&amp; x, const ReallyLongInt&amp; y) {
+<span class="lineNum">     494 </span><span class="lineCov">         20 :     return x.add(y);</span>
+<a name="495"><span class="lineNum">     495 </span>            : }</a>
+<span class="lineNum">     496 </span>            : 
+<span class="lineNum">     497 </span>            : ReallyLongInt operator-(const ReallyLongInt&amp; x, const ReallyLongInt&amp; y) {
+<span class="lineNum">     498 </span><span class="lineCov">         20 :     return x.sub(y);</span>
+<a name="499"><span class="lineNum">     499 </span>            : }</a>
+<span class="lineNum">     500 </span>            : 
+<span class="lineNum">     501 </span>            : ReallyLongInt operator*(const ReallyLongInt&amp; x, const ReallyLongInt&amp; y) {
+<span class="lineNum">     502 </span><span class="lineCov">         22 :     return x.mult(y);</span>
+<a name="503"><span class="lineNum">     503 </span>            : }</a>
+<span class="lineNum">     504 </span>            : 
+<span class="lineNum">     505 </span>            : ReallyLongInt operator/(const ReallyLongInt&amp; x, const ReallyLongInt&amp; y) {
+<span class="lineNum">     506 </span><span class="lineCov">         42 :     ReallyLongInt* quotient = new ReallyLongInt();</span>
+<span class="lineNum">     507 </span><span class="lineCov">         42 :     ReallyLongInt* remainder = new ReallyLongInt();</span>
+<span class="lineNum">     508 </span><span class="lineCov">         21 :     x.div(y, *quotient, *remainder);</span>
+<span class="lineNum">     509 </span><span class="lineCov">         21 :     return *quotient;</span>
+<a name="510"><span class="lineNum">     510 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     511 </span>            : 
+<span class="lineNum">     512 </span>            : ReallyLongInt operator%(const ReallyLongInt&amp; x, const ReallyLongInt&amp; y) {
+<span class="lineNum">     513 </span><span class="lineCov">         56 :     ReallyLongInt* quotient = new ReallyLongInt();</span>
+<span class="lineNum">     514 </span><span class="lineCov">         56 :     ReallyLongInt* remainder = new ReallyLongInt();</span>
+<span class="lineNum">     515 </span><span class="lineCov">         28 :     x.div(y, *quotient, *remainder);</span>
+<span class="lineNum">     516 </span><span class="lineCov">         28 :     return *remainder;</span>
+<a name="517"><span class="lineNum">     517 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     518 </span>            : 
+<span class="lineNum">     519 </span>            : ostream&amp; operator&lt;&lt;(ostream&amp; out, const ReallyLongInt&amp; x) {
+<span class="lineNum">     520 </span><span class="lineNoCov">          0 :     return x.print(out);</span>
+<span class="lineNum">     521 </span>            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

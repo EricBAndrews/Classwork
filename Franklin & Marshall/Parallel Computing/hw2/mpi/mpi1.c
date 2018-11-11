@@ -1,0 +1,19 @@
+#include <mpi.h> //Needed for every mpi program
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char *argv[])
+{
+  int numProc, myRank; //All variable will always be private
+  
+  MPI_Init(&argc, &argv); //Starts MPI -- all the processes and open com
+  
+  MPI_Comm_size(MPI_COMM_WORLD, &numProc);
+  MPI_Comm_rank(MPI_COMM_WORLD, &myRank);
+
+  printf("Hello from %d out of %d \n", myRank, numProc);
+  
+  MPI_Finalize(); //waits for all the processes to finish up and close com
+
+
+}

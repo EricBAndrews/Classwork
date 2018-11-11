@@ -1,0 +1,238 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <assert.h>
+#include <math.h>
+#include "common_upc.h"
+#include <upc.h>
+//May have to add addtional upc headers
+
+//
+//  tuned constants
+//
+#define density 0.0005
+#define mass    0.01
+#define cutoff  0.01
+#define min_r   (cutoff/100)
+#define dt      0.0005
+
+// calculate particle's bin number
+int binNum(shared particle_t *p, int bpr) {
+  return (floor(p->x/cutoff) + bpr*floor(p->y/cutoff));
+}
+
+//
+//  benchmarking program
+//
+int main(int argc, char **argv) {
+  /* shared int* navg = upc_global_alloc(sizeof(int), THREADS); */
+  /* shared int* nabsavg = upc_global_alloc(sizeof(int), THREADS); */
+  /* upc_forall (int i = 0; i < THREADS; ++i; &navg[i]) { */
+  /*   navg[i] = 0; */
+  /* } */
+  int navg,nabsavg = 0;
+  /* shared double* dmin = upc_global_alloc(sizeof(double), THREADS); */
+  /* shared double* davg = upc_global_alloc(sizeof(double), THREADS); */
+  /* shared double* absmin = upc_global_alloc(sizeof(double), THREADS); */
+  /* shared double* absavg = upc_global_alloc(sizeof(double), THREADS); */
+  double dmin, davg, absmin = 1.0,absavg = 0.0;
+  /* upc_forall (int i = 0; i < THREADS; ++i; &dmin[i]) { */
+  /*   dmin[i] = davg[i] = absmin[i] = 1.0; */
+  /*   absavg[i] = 0.0; */
+  /* } */
+
+  if (find_option(argc, argv, "-h") >=0) {
+    printf("Options:\n");
+    printf("-h to see this help\n");
+    printf("-n <int> to set the number of particles\n");
+    printf("-o <filename> to specify the output file name\n");
+    printf("-s <filename> to specify a summary file name\n");
+    printf("-no turns off all correctness checks and particle output\n");
+    return 0;
+  }
+    
+  int n = read_int(argc, argv, "-n", 1000);
+
+  char *savename = read_string(argc, argv, "-o", NULL);
+  char *sumname = read_string(argc, argv, "-s", NULL);
+
+  FILE *fsave = savename ? fopen(savename, "w") : NULL;
+  FILE *fsum = sumname ? fopen (sumname, "a") : NULL;
+    
+  // particle_t *particles = (particle_t*) malloc(n * sizeof(particle_t));
+  // particles are shared by all threads
+  particles = upc_all_alloc(sizeof(particle_t), n);
+  set_size(n);
+  if (MYTHREAD == 0) {
+    init_particles(n, particles);
+  }
+
+  //printf("allocated particles\n");
+    
+  // create spatial bins (of size cutoff by cutoff)
+  double size = sqrt(density*n);
+  int bpr = ceil(size/cutoff);
+  int numbins = bpr*bpr;
+  //vector<particle_t*> *bins = new vector<particle_t*>[numbins];
+  // create a shared array of bins as well
+  bins = upc_all_alloc(numbins, sizeof(array_t));
+  upc_forall (int i = 0; i < numbins; ++i; &bins[i]) {
+    array_t_init(&bins[i]);
+  }
+
+  //printf("allocated bins\n");
+  
+  //
+  //  simulate a number of time steps
+  //
+  double simulation_time = read_timer();
+  for (int step = 0; step < NSTEPS; step++) {
+    //printf("simulating...\n");
+    /* navg[MYTHREAD] = 0; */
+    /* davg[MYTHREAD] = 0.0; */
+    /* dmin[MYTHREAD] = 1.0; */
+    navg = 0;
+    davg = 0.0;
+    dmin = 1.0;
+
+    // clear bins at each time step
+    upc_forall (int m = 0; m < numbins; m++; &bins[m]) {
+      //bins[m].clear();
+      array_t_clear(&bins[m]);
+    }
+
+    upc_barrier;
+
+    //printf("cleared bins\n");
+    // place particles in bins
+    upc_forall (int i = 0; i < n; i++; &particles[i]) {
+      //bins[binNum(particles[i],bpr)].push_back(particles + i);
+      int b = binNum(&particles[i],bpr);
+      //array_t_push_back(&bins[b], particles+i);
+      array_t_push_back(&bins[b], b);
+    }
+    upc_barrier;
+    //printf("placed particles\n");
+    //
+    //  compute forces
+    //
+    upc_forall (int p = 0; p < n; p++; &particles[p]) {
+      particles[p].ax = particles[p].ay = 0;
+        
+      // find current particle's bin, handle boundaries
+      int cbin = binNum(&particles[p], bpr);
+      int lowi = -1, highi = 1, lowj = -1, highj = 1;
+      if (cbin < bpr)
+        lowj = 0;
+      if (cbin % bpr == 0)
+        lowi = 0;
+      if (cbin % bpr == (bpr-1))
+        highi = 0;
+      if (cbin >= bpr*(bpr-1))
+        highj = 0;
+
+      // apply nearby forces
+      for (int i = lowi; i <= highi; i++)
+        for (int j = lowj; j <= highj; j++) {
+          int nbin = cbin + i + bpr*j;
+          int nnbin;
+          array_t_size(&bins[nbin], &nnbin);
+          // printf("hi\n");
+          //for (int k = 0; k < bins[nbin].size(); k++ )
+          for (int k = 0; k < nnbin; ++k) {
+		
+            //apply_force( &particles[p], bins[nbin][k], &dmin, &davg, &navg);
+            int temp;
+            //shared particle_t* temp;
+            array_t_get(&bins[nbin], k, &temp);
+            /* apply_force(&particles[p], &temp , &dmin[MYTHREAD], */
+            /*             &davg[MYTHREAD], &navg[MYTHREAD]); */
+            apply_force(&particles[p], &particles[temp], &dmin, &davg, &navg);
+          }
+        }
+    }
+    upc_barrier;
+    //
+    //  move particles
+    //
+    upc_forall (int p = 0; p < n; p++; &particles[p]) {
+      move(&particles[p]);
+    }
+
+    upc_barrier;
+    if (find_option(argc, argv, "-no") == -1) {
+      //
+      //  computing statistical data
+      //
+      /* if (navg[MYTHREAD]) { */
+      /*   absavg[MYTHREAD] += davg[MYTHREAD]/navg[MYTHREAD]; */
+      /*   (nabsavg[MYTHREAD])++; */
+      /* } */
+      /* if (dmin[MYTHREAD] < absmin[MYTHREAD]) absmin[MYTHREAD] = */
+      /*                                          dmin[MYTHREAD]; */
+      if (navg) {
+        absavg += davg/navg;
+        nabsavg++;
+      }
+      if (dmin < absmin) absmin = dmin;
+ 
+      //
+      //  save if necessary
+      //
+      if (fsave && (step%SAVEFREQ) == 0)
+        save( fsave, n, particles );
+    }
+  }
+  //printf("hi\n");
+  if (MYTHREAD == 0) {
+    simulation_time = read_timer() - simulation_time;
+    
+    printf("n = %d, simulation time = %g seconds", n, simulation_time);
+
+    if (find_option(argc, argv, "-no") == -1) {
+      // reduced average, min, navg
+      /* double rabsavg = 0.0; */
+      /* double rabsmin = 1.0; */
+      /* int rnabsavg = 0; */
+      /* for (int i = 0; i < THREADS; ++i) { */
+      /*   if (absmin[i] < rabsmin) { */
+      /*     rabsmin = absmin[i]; */
+      /*   } */
+      /*   rabsavg += absavg[i]; */
+      /*   rnabsavg += nabsavg[i]; */
+      /* } */
+      /* if (nabsavg) { */
+      /*   rabsavg /= rnabsavg; */
+      /* } */
+      if (nabsavg) absavg /= nabsavg;
+      // 
+      //  -the minimum distance absmin between 2 particles during the run of the simulation
+      //  -A Correct simulation will have particles stay at greater than 0.4 (of cutoff) with typical values between .7-.8
+      //  -A simulation were particles don't interact correctly will be less than 0.4 (of cutoff) with typical values between .01-.05
+      //
+      //  -The average distance absavg is ~.95 when most particles are interacting correctly and ~.66 when no particles are interacting
+      //
+      printf (", absmin = %lf, absavg = %lf", absmin, absavg);
+      if (absmin < 0.4) printf ("\nThe minimum distance is below 0.4 meaning that some particle is not interacting");
+      if (absavg < 0.8) printf ("\nThe average distance is below 0.8 meaning that most particles are not interacting");
+    }
+    printf("\n");
+
+    //
+    // Printing summary data
+    //
+    if (fsum)
+      fprintf(fsum,"%d %g\n",n,simulation_time);
+
+    //
+    // Clearing space
+    //
+    if (fsum)
+      fclose (fsum);
+    upc_free(particles);
+    //delete [] bins;
+    upc_free(bins);
+    if (fsave)
+      fclose (fsave);
+  }    
+  return 0;
+}

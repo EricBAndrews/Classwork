@@ -1,0 +1,297 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - /Users/ericandrews/Desktop/Folders/Work/F&M/Semester 1/CS3/HW1/eandrewsHW1/ReallyLongInt_Unit.cc</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../../../../../index.html">top level</a> - <a href="index.html">Users/ericandrews/Desktop/Folders/Work/F&amp;M/Semester 1/CS3/HW1/eandrewsHW1</a> - ReallyLongInt_Unit.cc<span style="font-size: 80%;"> (source / <a href="ReallyLongInt_Unit.cc.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">182</td>
+            <td class="headerCovTableEntry">182</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-10-05 15:08:59</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #define CATCH_CONFIG_MAIN //This will make our main for us :)</a>
+<span class="lineNum">       2 </span>            : #include &quot;catch.hpp&quot;
+<span class="lineNum">       3 </span>            : 
+<span class="lineNum">       4 </span>            : /*More info on Catch
+<span class="lineNum">       5 </span>            :   Git-Page: https://github.com/philsquared/Catch
+<span class="lineNum">       6 </span>            : */
+<span class="lineNum">       7 </span>            : 
+<span class="lineNum">       8 </span>            : //What are we testing today?
+<span class="lineNum">       9 </span>            : #include&quot;ReallyLongInt.hpp&quot;
+<a name="10"><span class="lineNum">      10 </span>            : #include&quot;numberTheory.hpp&quot;</a>
+<span class="lineNum">      11 </span>            : 
+<span class="lineNum">      12 </span><span class="lineCov">          2 : TEST_CASE(&quot;TESTING ReallyLongInt class&quot;) {</span>
+<span class="lineNum">      13 </span>            : 
+<span class="lineNum">      14 </span><span class="lineCov">         54 :     SECTION(&quot;constructors&quot;) {</span>
+<span class="lineNum">      15 </span><span class="lineCov">          3 :         ReallyLongInt* num0 = new ReallyLongInt();</span>
+<span class="lineNum">      16 </span><span class="lineCov">          3 :         ReallyLongInt* num1 = new ReallyLongInt(1);</span>
+<span class="lineNum">      17 </span><span class="lineCov">          3 :         ReallyLongInt* num2 = new ReallyLongInt(-1);</span>
+<span class="lineNum">      18 </span><span class="lineCov">          5 :         ReallyLongInt* num3 = new ReallyLongInt(&quot;1&quot;);</span>
+<span class="lineNum">      19 </span><span class="lineCov">          5 :         ReallyLongInt* num4 = new ReallyLongInt(&quot;-1&quot;);</span>
+<span class="lineNum">      20 </span><span class="lineCov">          3 :         ReallyLongInt* num5 = new ReallyLongInt(*num4);</span>
+<span class="lineNum">      21 </span><span class="lineCov">          3 :         ReallyLongInt* num6 = new ReallyLongInt(-(*num5));</span>
+<span class="lineNum">      22 </span>            : 
+<span class="lineNum">      23 </span><span class="lineCov">         16 :         CHECK(*num0 == 0);</span>
+<span class="lineNum">      24 </span><span class="lineCov">         16 :         CHECK(*num1 == 1);</span>
+<span class="lineNum">      25 </span><span class="lineCov">         16 :         CHECK(*num2 == -1);</span>
+<span class="lineNum">      26 </span><span class="lineCov">         16 :         CHECK(*num3 == 1);</span>
+<span class="lineNum">      27 </span><span class="lineCov">         16 :         CHECK(*num4 == -1);</span>
+<span class="lineNum">      28 </span><span class="lineCov">         16 :         CHECK(*num5 == -1);</span>
+<span class="lineNum">      29 </span><span class="lineCov">         16 :         CHECK(*num6 == 1);</span>
+<span class="lineNum">      30 </span><span class="lineCov">          1 :     }</span>
+<span class="lineNum">      31 </span>            : 
+<span class="lineNum">      32 </span><span class="lineCov">         48 :     SECTION(&quot;comparison operators&quot;) {</span>
+<span class="lineNum">      33 </span><span class="lineCov">          3 :         ReallyLongInt* num0 = new ReallyLongInt(0);</span>
+<span class="lineNum">      34 </span><span class="lineCov">          3 :         ReallyLongInt* num1 = new ReallyLongInt(11);</span>
+<span class="lineNum">      35 </span><span class="lineCov">          3 :         ReallyLongInt* num2 = new ReallyLongInt(22);</span>
+<span class="lineNum">      36 </span><span class="lineCov">          3 :         ReallyLongInt* num3 = new ReallyLongInt(-11);</span>
+<span class="lineNum">      37 </span><span class="lineCov">          3 :         ReallyLongInt* num4 = new ReallyLongInt(-22);</span>
+<span class="lineNum">      38 </span><span class="lineCov">          3 :         ReallyLongInt* num5 = new ReallyLongInt(11);</span>
+<span class="lineNum">      39 </span><span class="lineCov">          3 :         ReallyLongInt* num6 = new ReallyLongInt(-11);</span>
+<span class="lineNum">      40 </span>            :         
+<span class="lineNum">      41 </span><span class="lineCov">         16 :         CHECK(*num0 &lt; *num1);</span>
+<span class="lineNum">      42 </span><span class="lineCov">         16 :         CHECK(*num1 &lt; *num2);</span>
+<span class="lineNum">      43 </span><span class="lineCov">         16 :         CHECK(*num0 &gt; *num3);</span>
+<span class="lineNum">      44 </span><span class="lineCov">         16 :         CHECK(*num3 &gt; *num4);</span>
+<span class="lineNum">      45 </span><span class="lineCov">         16 :         CHECK(*num3 &lt; *num1);</span>
+<span class="lineNum">      46 </span><span class="lineCov">         16 :         CHECK(*num1 &lt;= *num5);</span>
+<span class="lineNum">      47 </span><span class="lineCov">         16 :         CHECK(*num3 &gt;= *num6);</span>
+<span class="lineNum">      48 </span><span class="lineCov">          1 :     }</span>
+<span class="lineNum">      49 </span>            : 
+<span class="lineNum">      50 </span><span class="lineCov">         48 :     SECTION(&quot;arithmetic operators&quot;) {</span>
+<span class="lineNum">      51 </span><span class="lineCov">          3 :         ReallyLongInt* num0 = new ReallyLongInt(0);</span>
+<span class="lineNum">      52 </span><span class="lineCov">          3 :         ReallyLongInt* num1 = new ReallyLongInt(11);</span>
+<span class="lineNum">      53 </span><span class="lineCov">          3 :         ReallyLongInt* num2 = new ReallyLongInt(-11);</span>
+<span class="lineNum">      54 </span><span class="lineCov">          3 :         ReallyLongInt* num3 = new ReallyLongInt(7);</span>
+<span class="lineNum">      55 </span><span class="lineCov">          3 :         ReallyLongInt* num4 = new ReallyLongInt(3);</span>
+<span class="lineNum">      56 </span><span class="lineCov">          3 :         ReallyLongInt* num5 = new ReallyLongInt(1000);</span>
+<span class="lineNum">      57 </span><span class="lineCov">          3 :         ReallyLongInt* num6 = new ReallyLongInt(1);</span>
+<span class="lineNum">      58 </span><span class="lineCov">          3 :         ReallyLongInt* num7 = new ReallyLongInt(LLONG_MAX);</span>
+<span class="lineNum">      59 </span><span class="lineCov">          1 :         ++(*num7);</span>
+<span class="lineNum">      60 </span><span class="lineCov">          3 :         ReallyLongInt* num8 = new ReallyLongInt(*num7);</span>
+<span class="lineNum">      61 </span><span class="lineCov">          1 :         ++(*num8);</span>
+<span class="lineNum">      62 </span><span class="lineCov">          3 :         ReallyLongInt* num9 = new ReallyLongInt(11);</span>
+<span class="lineNum">      63 </span><span class="lineCov">          3 :         ReallyLongInt* num10 = new ReallyLongInt(-1044);</span>
+<span class="lineNum">      64 </span>            : 
+<span class="lineNum">      65 </span><span class="lineCov">         18 :         CHECK(*num0 + *num1 == 11);</span>
+<span class="lineNum">      66 </span><span class="lineCov">         18 :         CHECK(*num0 + *num2 == -11);</span>
+<span class="lineNum">      67 </span><span class="lineCov">         18 :         CHECK(*num1 + *num2 == 0);</span>
+<span class="lineNum">      68 </span><span class="lineCov">         18 :         CHECK(*num2 + *num1 == 0);</span>
+<span class="lineNum">      69 </span><span class="lineCov">         18 :         CHECK(*num0 - *num1 == -11);</span>
+<span class="lineNum">      70 </span><span class="lineCov">         18 :         CHECK(*num0 - *num2 == 11);</span>
+<span class="lineNum">      71 </span><span class="lineCov">         18 :         CHECK(*num1 - *num2 == 22);</span>
+<span class="lineNum">      72 </span><span class="lineCov">         18 :         CHECK(*num2 - *num1 == -22);</span>
+<span class="lineNum">      73 </span><span class="lineCov">         18 :         CHECK(*num2 - *num2 == 0);</span>
+<span class="lineNum">      74 </span><span class="lineCov">         18 :         CHECK(*num5 - *num6 == 999);</span>
+<span class="lineNum">      75 </span><span class="lineCov">         18 :         CHECK(*num9 - *num10 == 1055);</span>
+<span class="lineNum">      76 </span><span class="lineCov">         18 :         CHECK(*num0 * *num1 == 0);</span>
+<span class="lineNum">      77 </span><span class="lineCov">         18 :         CHECK(*num0 * *num2 == 0);</span>
+<span class="lineNum">      78 </span><span class="lineCov">         18 :         CHECK(*num1 * *num2 == -121);</span>
+<span class="lineNum">      79 </span><span class="lineCov">         18 :         CHECK(*num0 / *num1 == 0);</span>
+<span class="lineNum">      80 </span><span class="lineCov">         18 :         CHECK(*num0 / *num2 == 0);</span>
+<span class="lineNum">      81 </span><span class="lineCov">         18 :         CHECK(*num1 / *num2 == -1);</span>
+<span class="lineNum">      82 </span><span class="lineCov">         18 :         CHECK(*num2 / *num1 == -1);</span>
+<span class="lineNum">      83 </span><span class="lineCov">         18 :         CHECK(*num3 % *num4 == 1);</span>
+<span class="lineNum">      84 </span><span class="lineCov">         18 :         CHECK(*num8 % *num7 == 1);</span>
+<span class="lineNum">      85 </span><span class="lineCov">          1 :     }</span>
+<span class="lineNum">      86 </span>            : 
+<span class="lineNum">      87 </span><span class="lineCov">         48 :     SECTION(&quot;assignment operators&quot;) {</span>
+<span class="lineNum">      88 </span><span class="lineCov">          3 :         ReallyLongInt* num0 = new ReallyLongInt(0);</span>
+<span class="lineNum">      89 </span><span class="lineCov">          3 :         ReallyLongInt* num1 = new ReallyLongInt(99);</span>
+<span class="lineNum">      90 </span><span class="lineCov">          3 :         ReallyLongInt* num2 = new ReallyLongInt(-99);</span>
+<span class="lineNum">      91 </span>            :         
+<span class="lineNum">      92 </span><span class="lineCov">          1 :         *num0 += *num1;</span>
+<span class="lineNum">      93 </span><span class="lineCov">         16 :         CHECK(*num0 == 99);</span>
+<span class="lineNum">      94 </span><span class="lineCov">          1 :         *num0 -= *num2;</span>
+<span class="lineNum">      95 </span><span class="lineCov">         16 :         CHECK(*num0 == 198);</span>
+<span class="lineNum">      96 </span><span class="lineCov">          1 :         *num0 -= *num1;</span>
+<span class="lineNum">      97 </span><span class="lineCov">         16 :         CHECK(*num0 == 99);</span>
+<span class="lineNum">      98 </span><span class="lineCov">          1 :         *num0 += *num2;</span>
+<span class="lineNum">      99 </span><span class="lineCov">         16 :         CHECK(*num0 == 0);</span>
+<span class="lineNum">     100 </span><span class="lineCov">          1 :         *num0 -= *num1;</span>
+<span class="lineNum">     101 </span><span class="lineCov">         16 :         CHECK(*num0 == -99);</span>
+<span class="lineNum">     102 </span><span class="lineCov">          1 :         *num0 += *num2;</span>
+<span class="lineNum">     103 </span><span class="lineCov">         16 :         CHECK(*num0 == -198);</span>
+<span class="lineNum">     104 </span><span class="lineCov">          1 :         *num1 *= *num1;</span>
+<span class="lineNum">     105 </span><span class="lineCov">         16 :         CHECK(*num1 == 9801);</span>
+<span class="lineNum">     106 </span><span class="lineCov">          1 :         *num2 *= *num1;</span>
+<span class="lineNum">     107 </span><span class="lineCov">         16 :         CHECK(*num2 == -970299);</span>
+<span class="lineNum">     108 </span><span class="lineCov">          1 :         *num2 *= *num2;</span>
+<span class="lineNum">     109 </span><span class="lineCov">         16 :         CHECK(*num2 == 941480149401);</span>
+<span class="lineNum">     110 </span><span class="lineCov">          1 :         *num2 /= *num1;</span>
+<span class="lineNum">     111 </span><span class="lineCov">         16 :         CHECK(*num2 == 96059601);</span>
+<span class="lineNum">     112 </span>            :         
+<span class="lineNum">     113 </span><span class="lineCov">          1 :     }</span>
+<span class="lineNum">     114 </span>            : 
+<span class="lineNum">     115 </span><span class="lineCov">         48 :     SECTION(&quot;misc operators&quot;) {</span>
+<span class="lineNum">     116 </span><span class="lineCov">          3 :         ReallyLongInt* num0 = new ReallyLongInt(0);</span>
+<span class="lineNum">     117 </span><span class="lineCov">          3 :         ReallyLongInt* num1 = new ReallyLongInt(1);</span>
+<span class="lineNum">     118 </span><span class="lineCov">          3 :         ReallyLongInt* num2 = new ReallyLongInt(-1);</span>
+<span class="lineNum">     119 </span>            :         
+<span class="lineNum">     120 </span><span class="lineCov">         17 :         CHECK_FALSE(*num1 == *num2);</span>
+<span class="lineNum">     121 </span><span class="lineCov">          2 :         (*num0)++;</span>
+<span class="lineNum">     122 </span><span class="lineCov">         16 :         CHECK(*num0 == 1);</span>
+<span class="lineNum">     123 </span><span class="lineCov">          1 :         ++(*num0);</span>
+<span class="lineNum">     124 </span><span class="lineCov">         16 :         CHECK(*num0 == 2);</span>
+<span class="lineNum">     125 </span><span class="lineCov">          2 :         (*num0)--;</span>
+<span class="lineNum">     126 </span><span class="lineCov">         16 :         CHECK(*num0 == 1);</span>
+<span class="lineNum">     127 </span><span class="lineCov">          1 :         --(*num0);</span>
+<span class="lineNum">     128 </span><span class="lineCov">         16 :         CHECK(*num0 == 0);</span>
+<span class="lineNum">     129 </span><span class="lineCov">         18 :         CHECK(-(*num1) == -1);</span>
+<span class="lineNum">     130 </span><span class="lineCov">         18 :         CHECK(-(*num2) == 1);</span>
+<span class="lineNum">     131 </span><span class="lineCov">          1 :     }</span>
+<span class="lineNum">     132 </span>            : 
+<span class="lineNum">     133 </span><span class="lineCov">         48 :     SECTION(&quot;misc functions&quot;) {</span>
+<span class="lineNum">     134 </span><span class="lineCov">          3 :         ReallyLongInt* num0 = new ReallyLongInt(10);</span>
+<span class="lineNum">     135 </span><span class="lineCov">          3 :         ReallyLongInt* num1 = new ReallyLongInt(LLONG_MAX);</span>
+<span class="lineNum">     136 </span><span class="lineCov">          3 :         ReallyLongInt* num2 = new ReallyLongInt(-10);</span>
+<span class="lineNum">     137 </span>            :         long long longNum0;
+<span class="lineNum">     138 </span>            :         long long longNum1;
+<span class="lineNum">     139 </span>            :         long long longNum2;
+<span class="lineNum">     140 </span>            : 
+<span class="lineNum">     141 </span><span class="lineCov">          2 :         longNum0 = num0-&gt;toLongLong();</span>
+<span class="lineNum">     142 </span><span class="lineCov">         16 :         CHECK(longNum0 == 10);</span>
+<span class="lineNum">     143 </span><span class="lineCov">          2 :         longNum1 = num1-&gt;toLongLong();</span>
+<span class="lineNum">     144 </span><span class="lineCov">         16 :         CHECK(longNum1 == LLONG_MAX);</span>
+<span class="lineNum">     145 </span><span class="lineCov">          1 :         ++(*num1);</span>
+<span class="lineNum">     146 </span><span class="lineCov">          2 :         longNum1 = num1-&gt;toLongLong();</span>
+<span class="lineNum">     147 </span><span class="lineCov">         16 :         CHECK(longNum1 == 0);</span>
+<span class="lineNum">     148 </span><span class="lineCov">          2 :         longNum2 = num2-&gt;toLongLong();</span>
+<span class="lineNum">     149 </span><span class="lineCov">         16 :         CHECK(longNum2 == -10);</span>
+<span class="lineNum">     150 </span><span class="lineCov">          1 :     }</span>
+<a name="151"><span class="lineNum">     151 </span><span class="lineCov">          6 : }</span></a>
+<span class="lineNum">     152 </span>            : 
+<span class="lineNum">     153 </span><span class="lineCov">          2 : TEST_CASE(&quot;TESTING numberTheory algorithms&quot;) {</span>
+<span class="lineNum">     154 </span><span class="lineCov">         27 :     SECTION(&quot;isPrime&quot;) {</span>
+<span class="lineNum">     155 </span><span class="lineCov">          1 :         int intNum1 = 7;</span>
+<span class="lineNum">     156 </span><span class="lineCov">          1 :         int intNum2 = 15;</span>
+<span class="lineNum">     157 </span><span class="lineCov">          1 :         int intNum3 = -2;</span>
+<span class="lineNum">     158 </span><span class="lineCov">          1 :         long long longNum1 = 7;</span>
+<span class="lineNum">     159 </span><span class="lineCov">          1 :         long long longNum2 = 15;</span>
+<span class="lineNum">     160 </span><span class="lineCov">          1 :         long long longNum3 = -2;</span>
+<span class="lineNum">     161 </span><span class="lineCov">          3 :         ReallyLongInt* rlNum1 = new ReallyLongInt(7);</span>
+<span class="lineNum">     162 </span><span class="lineCov">          3 :         ReallyLongInt* rlNum2 = new ReallyLongInt(15);</span>
+<span class="lineNum">     163 </span><span class="lineCov">          3 :         ReallyLongInt* rlNum3 = new ReallyLongInt(-2);</span>
+<span class="lineNum">     164 </span>            :         
+<span class="lineNum">     165 </span><span class="lineCov">         15 :         CHECK(isPrime(intNum1));</span>
+<span class="lineNum">     166 </span><span class="lineCov">         16 :         CHECK_FALSE(isPrime(intNum2));</span>
+<span class="lineNum">     167 </span><span class="lineCov">         16 :         CHECK_FALSE(isPrime(intNum3));</span>
+<span class="lineNum">     168 </span><span class="lineCov">         15 :         CHECK(isPrime(longNum1));</span>
+<span class="lineNum">     169 </span><span class="lineCov">         16 :         CHECK_FALSE(isPrime(longNum2));</span>
+<span class="lineNum">     170 </span><span class="lineCov">         16 :         CHECK_FALSE(isPrime(longNum3));</span>
+<span class="lineNum">     171 </span><span class="lineCov">         15 :         CHECK(isPrime(*rlNum1));</span>
+<span class="lineNum">     172 </span><span class="lineCov">         16 :         CHECK_FALSE(isPrime(*rlNum2));</span>
+<span class="lineNum">     173 </span><span class="lineCov">         16 :         CHECK_FALSE(isPrime(*rlNum3));</span>
+<span class="lineNum">     174 </span><span class="lineCov">          1 :     }</span>
+<span class="lineNum">     175 </span>            : 
+<span class="lineNum">     176 </span><span class="lineCov">         24 :     SECTION(&quot;modPower&quot;) {</span>
+<span class="lineNum">     177 </span><span class="lineCov">          1 :         unsigned int intNum1 = 12;</span>
+<span class="lineNum">     178 </span><span class="lineCov">          1 :         unsigned int intNum2 = 8;</span>
+<span class="lineNum">     179 </span><span class="lineCov">          1 :         unsigned int intNum3 = 17;</span>
+<span class="lineNum">     180 </span><span class="lineCov">          1 :         unsigned long long longNum1 = 12;</span>
+<span class="lineNum">     181 </span><span class="lineCov">          1 :         unsigned long long longNum2 = 8;</span>
+<span class="lineNum">     182 </span><span class="lineCov">          1 :         unsigned long long longNum3 = 17;</span>
+<span class="lineNum">     183 </span><span class="lineCov">          3 :         ReallyLongInt* rlNum1 = new ReallyLongInt(121);</span>
+<span class="lineNum">     184 </span><span class="lineCov">          3 :         ReallyLongInt* rlNum2 = new ReallyLongInt(7);</span>
+<span class="lineNum">     185 </span><span class="lineCov">          3 :         ReallyLongInt* rlNum3 = new ReallyLongInt(31);</span>
+<span class="lineNum">     186 </span>            : 
+<span class="lineNum">     187 </span><span class="lineCov">         17 :         CHECK(modPower(intNum1, intNum2, intNum3) == 16);</span>
+<span class="lineNum">     188 </span><span class="lineCov">         17 :         CHECK(modPower(longNum1, longNum2, longNum3) == 16);</span>
+<span class="lineNum">     189 </span><span class="lineCov">         18 :         CHECK(modPower(*rlNum1, *rlNum2, *rlNum3) == 14);</span>
+<span class="lineNum">     190 </span><span class="lineCov">          1 :     }</span>
+<span class="lineNum">     191 </span>            : 
+<span class="lineNum">     192 </span><span class="lineCov">         24 :     SECTION(&quot;extendedEuclid&quot;) {</span>
+<span class="lineNum">     193 </span><span class="lineCov">          1 :         int intNum1 = 1234;</span>
+<span class="lineNum">     194 </span><span class="lineCov">          1 :         int intNum2 = 7482;</span>
+<span class="lineNum">     195 </span>            :         int intCo1;
+<span class="lineNum">     196 </span>            :         int intCo2;
+<span class="lineNum">     197 </span>            :         int intGCD;
+<span class="lineNum">     198 </span><span class="lineCov">          1 :         long long longNum1 = 1234;</span>
+<span class="lineNum">     199 </span><span class="lineCov">          1 :         long long longNum2 = 7482;</span>
+<span class="lineNum">     200 </span>            :         long long longCo1;
+<span class="lineNum">     201 </span>            :         long long longCo2;
+<span class="lineNum">     202 </span>            :         long long longGCD;
+<span class="lineNum">     203 </span><span class="lineCov">          3 :         ReallyLongInt* rlNum1 = new ReallyLongInt(1234);</span>
+<span class="lineNum">     204 </span><span class="lineCov">          3 :         ReallyLongInt* rlNum2 = new ReallyLongInt(7482);</span>
+<span class="lineNum">     205 </span><span class="lineCov">          3 :         ReallyLongInt* rlCo1 = new ReallyLongInt();</span>
+<span class="lineNum">     206 </span><span class="lineCov">          3 :         ReallyLongInt* rlCo2 = new ReallyLongInt();</span>
+<span class="lineNum">     207 </span><span class="lineCov">          3 :         ReallyLongInt* rlGCD = new ReallyLongInt();</span>
+<span class="lineNum">     208 </span>            :         
+<span class="lineNum">     209 </span><span class="lineCov">          2 :         intGCD = extendedEuclid(intNum1, intNum2, &amp;intCo1, &amp;intCo2);</span>
+<span class="lineNum">     210 </span><span class="lineCov">          2 :         longGCD = extendedEuclid(longNum1, longNum2, &amp;longCo1, &amp;longCo2);</span>
+<span class="lineNum">     211 </span><span class="lineCov">          3 :         *rlGCD = extendedEuclid(*rlNum1, *rlNum2, rlCo1, rlCo2);</span>
+<span class="lineNum">     212 </span><span class="lineCov">         16 :         CHECK(intGCD == 2);</span>
+<span class="lineNum">     213 </span><span class="lineCov">         16 :         CHECK(longGCD == 2);</span>
+<span class="lineNum">     214 </span><span class="lineCov">         16 :         CHECK(*rlGCD == 2);</span>
+<span class="lineNum">     215 </span><span class="lineCov">         16 :         CHECK((intCo1 * intNum1) + (intCo2 * intNum2) == intGCD);</span>
+<span class="lineNum">     216 </span><span class="lineCov">         16 :         CHECK((longCo1 * longNum1) + (longCo2 * longNum2) == longGCD);</span>
+<span class="lineNum">     217 </span><span class="lineCov">         16 :         CHECK(*rlCo1 == 1055);</span>
+<span class="lineNum">     218 </span><span class="lineCov">         16 :         CHECK(*rlCo2 == -174);</span>
+<span class="lineNum">     219 </span><span class="lineCov">         22 :         CHECK((*rlCo1 * *rlNum1) + (*rlCo2 * *rlNum2) == *rlGCD);</span>
+<span class="lineNum">     220 </span><span class="lineCov">          1 :     }</span>
+<span class="lineNum">     221 </span><span class="lineCov">          3 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

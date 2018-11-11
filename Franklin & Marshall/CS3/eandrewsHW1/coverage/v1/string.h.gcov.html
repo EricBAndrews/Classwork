@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - v1/string.h</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">v1</a> - string.h<span style="font-size: 80%;"> (source / <a href="string.h.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-10-05 15:08:59</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : // -*- C++ -*-</a>
+<span class="lineNum">       2 </span>            : //===--------------------------- string.h ---------------------------------===//
+<span class="lineNum">       3 </span>            : //
+<span class="lineNum">       4 </span>            : //                     The LLVM Compiler Infrastructure
+<span class="lineNum">       5 </span>            : //
+<span class="lineNum">       6 </span>            : // This file is distributed under the University of Illinois Open Source
+<span class="lineNum">       7 </span>            : // License. See LICENSE.TXT for details.
+<span class="lineNum">       8 </span>            : //
+<span class="lineNum">       9 </span>            : //===----------------------------------------------------------------------===//
+<span class="lineNum">      10 </span>            : 
+<span class="lineNum">      11 </span>            : #ifndef _LIBCPP_STRING_H
+<span class="lineNum">      12 </span>            : #define _LIBCPP_STRING_H
+<span class="lineNum">      13 </span>            : 
+<span class="lineNum">      14 </span>            : /*
+<span class="lineNum">      15 </span>            :     string.h synopsis
+<span class="lineNum">      16 </span>            : 
+<span class="lineNum">      17 </span>            : Macros:
+<span class="lineNum">      18 </span>            : 
+<span class="lineNum">      19 </span>            :     NULL
+<span class="lineNum">      20 </span>            : 
+<span class="lineNum">      21 </span>            : Types:
+<span class="lineNum">      22 </span>            : 
+<span class="lineNum">      23 </span>            :     size_t
+<span class="lineNum">      24 </span>            : 
+<span class="lineNum">      25 </span>            : void* memcpy(void* restrict s1, const void* restrict s2, size_t n);
+<span class="lineNum">      26 </span>            : void* memmove(void* s1, const void* s2, size_t n);
+<span class="lineNum">      27 </span>            : char* strcpy (char* restrict s1, const char* restrict s2);
+<span class="lineNum">      28 </span>            : char* strncpy(char* restrict s1, const char* restrict s2, size_t n);
+<span class="lineNum">      29 </span>            : char* strcat (char* restrict s1, const char* restrict s2);
+<span class="lineNum">      30 </span>            : char* strncat(char* restrict s1, const char* restrict s2, size_t n);
+<span class="lineNum">      31 </span>            : int memcmp(const void* s1, const void* s2, size_t n);
+<span class="lineNum">      32 </span>            : int strcmp (const char* s1, const char* s2);
+<span class="lineNum">      33 </span>            : int strncmp(const char* s1, const char* s2, size_t n);
+<span class="lineNum">      34 </span>            : int strcoll(const char* s1, const char* s2);
+<span class="lineNum">      35 </span>            : size_t strxfrm(char* restrict s1, const char* restrict s2, size_t n);
+<span class="lineNum">      36 </span>            : const void* memchr(const void* s, int c, size_t n);
+<span class="lineNum">      37 </span>            :       void* memchr(      void* s, int c, size_t n);
+<span class="lineNum">      38 </span>            : const char* strchr(const char* s, int c);
+<span class="lineNum">      39 </span>            :       char* strchr(      char* s, int c);
+<span class="lineNum">      40 </span>            : size_t strcspn(const char* s1, const char* s2);
+<span class="lineNum">      41 </span>            : const char* strpbrk(const char* s1, const char* s2);
+<span class="lineNum">      42 </span>            :       char* strpbrk(      char* s1, const char* s2);
+<span class="lineNum">      43 </span>            : const char* strrchr(const char* s, int c);
+<span class="lineNum">      44 </span>            :       char* strrchr(      char* s, int c);
+<span class="lineNum">      45 </span>            : size_t strspn(const char* s1, const char* s2);
+<span class="lineNum">      46 </span>            : const char* strstr(const char* s1, const char* s2);
+<span class="lineNum">      47 </span>            :       char* strstr(      char* s1, const char* s2);
+<span class="lineNum">      48 </span>            : char* strtok(char* restrict s1, const char* restrict s2);
+<span class="lineNum">      49 </span>            : void* memset(void* s, int c, size_t n);
+<span class="lineNum">      50 </span>            : char* strerror(int errnum);
+<span class="lineNum">      51 </span>            : size_t strlen(const char* s);
+<span class="lineNum">      52 </span>            : 
+<span class="lineNum">      53 </span>            : */
+<span class="lineNum">      54 </span>            : 
+<span class="lineNum">      55 </span>            : #include &lt;__config&gt;
+<span class="lineNum">      56 </span>            : 
+<span class="lineNum">      57 </span>            : #if !defined(_LIBCPP_HAS_NO_PRAGMA_SYSTEM_HEADER)
+<span class="lineNum">      58 </span>            : #pragma GCC system_header
+<span class="lineNum">      59 </span>            : #endif
+<span class="lineNum">      60 </span>            : 
+<span class="lineNum">      61 </span>            : #include_next &lt;string.h&gt;
+<span class="lineNum">      62 </span>            : 
+<span class="lineNum">      63 </span>            : // MSVCRT, GNU libc and its derivates may already have the correct prototype in
+<span class="lineNum">      64 </span>            : // &lt;string.h&gt;. This macro can be defined by users if their C library provides
+<span class="lineNum">      65 </span>            : // the right signature.
+<span class="lineNum">      66 </span>            : #if defined(__CORRECT_ISO_CPP_STRING_H_PROTO) || defined(_LIBCPP_MSVCRT) || \
+<span class="lineNum">      67 </span>            :     defined(__sun__) || defined(_STRING_H_CPLUSPLUS_98_CONFORMANCE_)
+<span class="lineNum">      68 </span>            : #define _LIBCPP_STRING_H_HAS_CONST_OVERLOADS
+<span class="lineNum">      69 </span>            : #endif
+<span class="lineNum">      70 </span>            : 
+<span class="lineNum">      71 </span>            : #if defined(__cplusplus) &amp;&amp; !defined(_LIBCPP_STRING_H_HAS_CONST_OVERLOADS) &amp;&amp; defined(_LIBCPP_PREFERRED_OVERLOAD)
+<span class="lineNum">      72 </span>            : extern &quot;C++&quot; {
+<span class="lineNum">      73 </span>            : inline _LIBCPP_INLINE_VISIBILITY
+<span class="lineNum">      74 </span>            : char* __libcpp_strchr(const char* __s, int __c) {return (char*)strchr(__s, __c);}
+<span class="lineNum">      75 </span>            : inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_PREFERRED_OVERLOAD
+<span class="lineNum">      76 </span>            : const char* strchr(const char* __s, int __c) {return __libcpp_strchr(__s, __c);}
+<span class="lineNum">      77 </span>            : inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_PREFERRED_OVERLOAD
+<span class="lineNum">      78 </span>            :       char* strchr(      char* __s, int __c) {return __libcpp_strchr(__s, __c);}
+<span class="lineNum">      79 </span>            : 
+<span class="lineNum">      80 </span>            : inline _LIBCPP_INLINE_VISIBILITY
+<span class="lineNum">      81 </span>            : char* __libcpp_strpbrk(const char* __s1, const char* __s2) {return (char*)strpbrk(__s1, __s2);}
+<span class="lineNum">      82 </span>            : inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_PREFERRED_OVERLOAD
+<span class="lineNum">      83 </span>            : const char* strpbrk(const char* __s1, const char* __s2) {return __libcpp_strpbrk(__s1, __s2);}
+<span class="lineNum">      84 </span>            : inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_PREFERRED_OVERLOAD
+<span class="lineNum">      85 </span>            :       char* strpbrk(      char* __s1, const char* __s2) {return __libcpp_strpbrk(__s1, __s2);}
+<span class="lineNum">      86 </span>            : 
+<span class="lineNum">      87 </span>            : inline _LIBCPP_INLINE_VISIBILITY
+<span class="lineNum">      88 </span>            : char* __libcpp_strrchr(const char* __s, int __c) {return (char*)strrchr(__s, __c);}
+<span class="lineNum">      89 </span>            : inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_PREFERRED_OVERLOAD
+<span class="lineNum">      90 </span>            : const char* strrchr(const char* __s, int __c) {return __libcpp_strrchr(__s, __c);}
+<span class="lineNum">      91 </span>            : inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_PREFERRED_OVERLOAD
+<span class="lineNum">      92 </span>            :       char* strrchr(      char* __s, int __c) {return __libcpp_strrchr(__s, __c);}
+<a name="93"><span class="lineNum">      93 </span>            : </a>
+<span class="lineNum">      94 </span>            : inline _LIBCPP_INLINE_VISIBILITY
+<a name="95"><span class="lineNum">      95 </span><span class="lineCov">          6 : void* __libcpp_memchr(const void* __s, int __c, size_t __n) {return (void*)memchr(__s, __c, __n);}</span></a>
+<span class="lineNum">      96 </span>            : inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_PREFERRED_OVERLOAD
+<span class="lineNum">      97 </span><span class="lineCov">          6 : const void* memchr(const void* __s, int __c, size_t __n) {return __libcpp_memchr(__s, __c, __n);}</span>
+<span class="lineNum">      98 </span>            : inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_PREFERRED_OVERLOAD
+<span class="lineNum">      99 </span>            :       void* memchr(      void* __s, int __c, size_t __n) {return __libcpp_memchr(__s, __c, __n);}
+<span class="lineNum">     100 </span>            : 
+<span class="lineNum">     101 </span>            : inline _LIBCPP_INLINE_VISIBILITY
+<span class="lineNum">     102 </span>            : char* __libcpp_strstr(const char* __s1, const char* __s2) {return (char*)strstr(__s1, __s2);}
+<span class="lineNum">     103 </span>            : inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_PREFERRED_OVERLOAD
+<span class="lineNum">     104 </span>            : const char* strstr(const char* __s1, const char* __s2) {return __libcpp_strstr(__s1, __s2);}
+<span class="lineNum">     105 </span>            : inline _LIBCPP_INLINE_VISIBILITY _LIBCPP_PREFERRED_OVERLOAD
+<span class="lineNum">     106 </span>            :       char* strstr(      char* __s1, const char* __s2) {return __libcpp_strstr(__s1, __s2);}
+<span class="lineNum">     107 </span>            : }
+<span class="lineNum">     108 </span>            : #endif
+<span class="lineNum">     109 </span>            : 
+<span class="lineNum">     110 </span>            : #endif  // _LIBCPP_STRING_H
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
